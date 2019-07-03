@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 4b5ea03fb5523004a8209d14f690fd6c
+timeCreated: 1525194927
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Sensations and Qualities
+  fontNames:
+  - Sensations and Qualities
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

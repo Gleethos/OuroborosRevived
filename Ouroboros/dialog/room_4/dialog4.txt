@@ -1,0 +1,5 @@
+[enableDisplay]
+Self: ...drowning?[waitForEnter]
+Self: I c?n’t ?e! Le? me out![waitForEnter]
+Self: Hel? me! P??ase, I can??t go o? like this![waitForEnter]
+[disableDisplay]

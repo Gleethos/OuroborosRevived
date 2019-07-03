@@ -1,0 +1,5 @@
+Bug Name: Dialog-Bug#3
+Wiederholbar: ya
+Raum: 2
+Beschreibung:
+Dialog startet, bevor der Raum überhaupt betreten wurde.

@@ -1,0 +1,9 @@
+Bug Name: Script#1
+Wiederholbar: ya
+Raum: P
+Beschreibung:
+Wärend der gescripteten Scene verhält sich der 
+Character random und hört beim Dialog nicht auf zu
+gehen auf der Stelle. Danach hat er sich aufgehangen.
+Die Scene lief weiter aber der Character blieb auf 
+der stellelaufend auf dem selben Punkt.

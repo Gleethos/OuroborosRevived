@@ -1,0 +1,8 @@
+Bug Name: Grafik#2
+Wiederholbar: ya
+Raum: global
+Beschreibung:
+Man sieht einen großen Qualitätsunterschied zwischen
+den einzelnen Objectabschnitte(z.B. bei den Türen) 
+und der allgemeinen Map.
+Bild: Qualitätsunterschid

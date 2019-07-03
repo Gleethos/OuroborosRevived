@@ -1,0 +1,9 @@
+Bug Name: Logic#1
+Wiederholbar: ya
+Raum: 4
+Beschreibung:
+Nachdem man durch die Tür geglitch ist , kann
+man den Hebel einmal benutzen und dann nie wieder.
+Danach kann man aber zur Tür schwimmen, diese mit
+F öffnen und sitzt dann im Gang fest, da man die
+andere Tür nicht mehr öffnen kann.

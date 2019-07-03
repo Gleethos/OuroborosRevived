@@ -1,0 +1,4 @@
+[enableDisplay]
+Self: No... no thoughts... [waitForEnter]
+Self: I didn’t mean to... I want to... I don’t want anything. [waitForEnter]
+[disableDisplay]

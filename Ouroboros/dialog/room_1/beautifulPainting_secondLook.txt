@@ -1,0 +1,2 @@
+[enableDisplay]
+Self: So many beautiful memories[waitForEnter]

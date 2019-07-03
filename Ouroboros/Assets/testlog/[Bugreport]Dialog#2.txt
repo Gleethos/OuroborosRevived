@@ -1,0 +1,9 @@
+Bug Name: Dialog-Bug#2
+Wiederholbar: ya
+Raum: 1
+Beschreibung:
+...Self:I wonder... What do they mean?
+
+Sollte:
+...
+Self: I wonder... What do they mean?

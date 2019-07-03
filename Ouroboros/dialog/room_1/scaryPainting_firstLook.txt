@@ -1,0 +1,3 @@
+[enableDisplay]
+Self: This is disgusting[waitForEnter]
+Self: ...and kinda scary.[waitForEnter]

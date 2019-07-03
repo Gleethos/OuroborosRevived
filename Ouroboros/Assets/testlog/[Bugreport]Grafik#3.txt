@@ -1,0 +1,7 @@
+Bug Name: Grafik#3
+Wiederholbar: ya
+Raum: 5
+Beschreibung:
+Im fünften Raum ist mitten drin ein schwarzes 
+Viereck. Zumindest bei mir.
+Bild: SchwarzesViereckMittenImRaum

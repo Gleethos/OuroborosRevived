@@ -1,0 +1,6 @@
+[enableDisplay]
+Self: I remember her.[waitForEnter]
+Self: She is my first and last love.[waitForEnter]
+Self: I hope, she'll wait for me![waitForEnter]
+Self: I miss her so much...[waitForEnter]
+Self: I hope, I see her again soon...[waitForEnter]

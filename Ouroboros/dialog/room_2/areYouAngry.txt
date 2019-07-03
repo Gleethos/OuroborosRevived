@@ -1,0 +1,61 @@
+[enableDisplay]
+§: You are angry?[waitForEnter]
+Self: Of course I'm angry!![waitForEnter]
+§: Why?[waitForEnter]
+Self: Because nothing you've said so far has been of any kind of help for me.[timeout:1]
+      Or ANYBODY else.[waitForEnter]
+§: What help do you need?[waitForEnter]
+Self: Are you playing with me?[waitForEnter]
+§: No.[waitForEnter]
+Self: Is it so hard for you to understand what I want?[waitForEnter]
+§: I do understand. But I can not give you what you desire[waitForEnter]
+Self: So tell me! What do you understand? What do I desire?[waitForEnter]
+§: You want guidance.[waitForEnter]
+Self: Well... Yeah. I mean. No! I want... I want answers! So.
+      Yes! Maybe a little 'guidance'. Just a tiny bit! Guide me![waitForEnter]
+§: I can not guide you.[waitForEnter]
+Self: WHY?!?![waitForEnter]
+§: Because nothing I say will bring you closer to the center.[waitForEnter]
+Self: Then how do I get there?[waitForEnter]
+§: As I just told you! Anybodies words will never bring you closer:
+   This is your path. You ought to be somebody, then anybody, then nobody, then...[waitForEnter]
+Self: Then?[waitForEnter]
+§:  ...[waitForEnter]
+Self: Hey! What then?[waitForEnter]
+§ ...[waitForEnter]
+[choice:"STOP FUCKING WITH ME!","Talk to me!!!!","*okay, I need to think!*"][waitForAnswer][jumpTo:1.#]
+
+[===][1.1]
+[===]Self: STOP FUCKING WITH ME![waitForEnter]
+[===]Self: WHAT IS WRONG WITH YOU![waitForEnter]
+[===]§: You really are doing this wrong.[waitForEnter]
+[===]Self: 
+
+[===][1.2]
+[===]Self: Talk to me!
+
+[===][1.3]
+[===]*Okay, I need to think*[waitForEnter]
+[===][choice:"*I need to find an exit!*","*I need to get more information from this weirdo!*","*I need to calm down!*"][waitForAnswer][jumpTo:1.2.#]
+[===|===][1.3.1]
+[===|===]*I need to find an exit!*[waitForEnter][jumpTo:2]
+[===|===]
+[===|===][1.3.2]
+[===|===]*I need to get more information from this weirdo!*[waitForEnter][jumpTo:2]
+[===|===]
+[===|===][1.3.3]
+[===|===]*I need to calm down!*[waitForEnter][jumpTo:2]
+[===|===]
+[===|===]
+[===|===]
+[2]
+[returnMessage:selfIsCalm]
+
+
+
+
+
+
+
+
+

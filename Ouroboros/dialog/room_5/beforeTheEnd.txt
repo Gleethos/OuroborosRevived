@@ -1,0 +1,13 @@
+[enableDisplay]
+§: Now you've got this far...[waitForEnter] 
+Self: Will I finally meet you?[waitForEnter] 
+[disableDisplay] 
+[timeout:2.5]
+[enableDisplay]
+§: You will see when you're here.[waitForEnter] 
+Self: Will you help me to leave this godforsaken place?[waitForEnter] 
+§: You'll see.[waitForEnter] 
+Self: I hope so...[waitForEnter]
+[disableDisplay] 
+[returnMessage:endingDialogue]
+

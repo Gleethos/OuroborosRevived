@@ -1,0 +1,5 @@
+Bug Name: Dialog-Bug#1
+Wiederholbar: ya
+Raum: A,1
+Beschreibung:
+Komisches Zeichen für den Unbekannten

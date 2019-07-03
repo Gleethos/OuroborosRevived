@@ -1,0 +1,7 @@
+Bug Name: Grafik#1
+Wiederholbar: ya
+Raum: 3
+Beschreibung:
+Die Wand, wo die Baumstämme hinter verschwinden, ist 
+unsauber gerendert.
+Bild: unsaubereBaumstämme

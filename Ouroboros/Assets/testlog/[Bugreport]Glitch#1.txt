@@ -1,0 +1,5 @@
+Bug Name: Glitch#1
+Wiederholbar: ya
+Raum: 4
+Beschreibung:
+Man kann sich durch die Tür glitchen

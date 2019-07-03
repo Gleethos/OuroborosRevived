@@ -1,0 +1,5 @@
+Bug Name: Start und End Screen
+Wiederholbar: ya
+Raum: -
+Beschreibung:
+Layout ist verschoben und passt nicht wirklich rein

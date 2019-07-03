@@ -1,0 +1,7 @@
+Bug Name: Dialog-Bug#5
+Wiederholbar: ya
+Raum: 1
+Beschreibung:
+Dialogbox bleibt leer für ungefähr 3 Sekunden 
+stehen bevor ein neuer Text kommt beim letzten
+Dialogabschnitt.

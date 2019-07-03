@@ -1,0 +1,7 @@
+Bug Name: Dialog-Bug#4
+Wiederholbar: ya
+Raum: 3
+Beschreibung:
+Wenn der Spieler erfolgreich die Erinnerungen verliert,
+kann er sich bewegen, obwohl der Dialog noch nicht
+fertig ist. Er kann auch durch die Tür gehen!

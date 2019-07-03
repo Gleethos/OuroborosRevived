@@ -1,0 +1,7 @@
+[enableDisplay]
+§: You don’t seem to miss anything at all.[waitForEnter] 
+Self: What should I miss? I haven’t lost anything.[waitForEnter] 
+§: Well, of course it is easy to not lose something if you never had anything in the first place.[waitForEnter] 
+Self: I don’t understand.[waitForEnter] 
+§: How pathetic... how sadening...[waitForEnter] 
+[returnMessage:endDialog]

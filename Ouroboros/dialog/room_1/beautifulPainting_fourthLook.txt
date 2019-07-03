@@ -1,0 +1,8 @@
+[enableDisplay]
+Self: 'Wait. I think it is moving!'[waitForEnter]
+[choice:"*inspect closer*","..."][waitForAnswer][jumpTo:1.#]
+[1.1][returnMessage:beautifulInspected]
+Self: 'Yes. I see. It is bending back and forth. It is being moved by the air.'[waitForEnter]
+Self: 'Something must be behind it.'[waitForEnter][exitDialog]
+[1.2]
+Self: ...[waitForEnter]

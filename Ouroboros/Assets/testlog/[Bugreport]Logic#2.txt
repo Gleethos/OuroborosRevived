@@ -1,0 +1,9 @@
+Bug Name: Logic#2
+Wiederholbar: ya
+Raum: 4
+Beschreibung:
+Wenn man einfach so zur Tür geht, ohne den Hebel 
+zu betätigen, kann man zwar durchgehen, aber
+der nächste Raum aktiviert sich nicht. Die Tür
+ist dann auch versperrt, sodass man nicht zurück 
+kann.
