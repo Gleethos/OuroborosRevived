@@ -40,6 +40,8 @@ public class player_script : MonoBehaviour {
 	[SerializeField]
 	private bool lockY = false;
 
+    private bool invActive = false;
+
 
 	void Start () {
 		walking = GetComponentInChildren(typeof(Animator)) as Animator;
@@ -55,17 +57,19 @@ public class player_script : MonoBehaviour {
 		if (freezy == false) {
 			GetDirection ();
 			Move ();
-			if (Input.GetKeyDown(KeyCode.I)){
+			if (Input.GetKeyDown(KeyCode.I) && !invActive){
 
 				StartCoroutine (displayItemHolder ());
-			} else if (Input.GetKeyDown (KeyCode.X)) {
-				
-				dialog.dialogAusgabe.text = "";
-				dialog.display.enabled = false;
+                invActive = true;
+			} else if (Input.GetKeyDown (KeyCode.I) && invActive) {
 
-			}
+                dialog.dialogAusgabe.text = "";
+                dialog.display.enabled = false;
+                invActive = false;
 
-			if (Input.GetKey (KeyCode.H)) {
+            }
+
+            if (Input.GetKey (KeyCode.H)) {
 				occInteraction ();
 			}
 		}
@@ -337,7 +341,7 @@ public class player_script : MonoBehaviour {
 	}
 
 	public void deleteIventory(){
-		Debug.Log ("Deleting success");
+		//Debug.Log ("Deleting success");
 		for (int i = 0; i < itemIndex; i++) {
 				itemHolder [i] = null;
 		}
@@ -345,24 +349,21 @@ public class player_script : MonoBehaviour {
 
 IEnumerator displayItemHolder(){
 
-		string dialogtxt = "";
+        string dialogtxt = "";
 
-		dialog.display.enabled = true;
+        dialog.display.enabled = true;
 
-		for (int i = 0; i < itemIndex; i++) {
-			if (itemHolder [i] != null) {
-				dialogtxt += itemHolder [i] + " | ";
-				//Debug.Log (i + ": " + dialogtxt);
-			}
-		}
+        for (int i = 0; i < itemIndex && itemHolder [i] != null; i++) {
+            dialogtxt += itemHolder [i] + " | ";
+        }
 
-		dialog.dialogAusgabe.text = "Memories\n";
-        if(itemHolder.Length > 0)
-		    dialog.dialogAusgabe.text += "| " + dialogtxt;
+        dialog.dialogAusgabe.text = "Memories\n";
+        if (itemHolder[0] != null)
+            dialog.dialogAusgabe.text += "| " + dialogtxt;
 
-		yield return new WaitForSecondsRealtime (10);
-		
-	}
+        yield return null;
+
+    }
 	public void setRoom(string room){
 		roomDir = room;
 	}

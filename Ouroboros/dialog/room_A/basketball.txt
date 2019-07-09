@@ -1,4 +1,7 @@
+[freeze]
 [enableDisplay]
 Self: I used to play a lot of basketball in my youth.[waitForEnter]
 Self: Sadly, I have neither the time nor the condition to do so nowadays.[waitForEnter]
 *sigh* [waitForEnter]
+[disableDisplay]
+[unfreeze]

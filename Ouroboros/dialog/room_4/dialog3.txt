@@ -1,5 +1,7 @@
+[freeze]
 [enableDisplay]
 Self: CaN i Even eXi?t withOUt MEMORIES? [waitForEnter]
 Self: I aM sCared of myseSELF...[waitForEnter]
 Self: Am I...[waitForEnter]
 [disableDisplay]
+[unfreeze]

@@ -1,5 +1,8 @@
+[freeze]
 [enableDisplay]
 Self: Oh, my favorite armchair.[waitForEnter]
 Self: But I'm not tired right now.[waitForEnter]
 Self: Mybe I'll take a nap in my armchair later.[waitForEnter]
 *be happy*[waitForEnter]
+[disableDisplay]
+[unfreeze]

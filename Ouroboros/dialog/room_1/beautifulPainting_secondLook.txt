@@ -1,2 +1,5 @@
+[freeze]
 [enableDisplay]
 Self: So many beautiful memories[waitForEnter]
+[disableDisplay]
+[unfreeze]

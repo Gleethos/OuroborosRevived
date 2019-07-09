@@ -1,5 +1,7 @@
+[freeze]
 [enableDisplay]
 Self: Now I have got nothing... [waitForEnter]
 Self: What shall I do without my memories? [waitForEnter]
 Self: What should I think? [waitForEnter]
 [disableDisplay]
+[unfreeze]

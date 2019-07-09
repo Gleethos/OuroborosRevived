@@ -18,8 +18,6 @@ public class item_script : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.F)) {
 				item = this.tag;
 				spieler.setItemHolder (item);
-				spieler.printItemHolder ();
-				spieler.saveItemHolder ();
 				Destroy (gameObject);
 			}
 		}
@@ -27,7 +25,6 @@ public class item_script : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Player") {
-			Debug.Log ("Player detected");
 			entry = true;
 
 		}

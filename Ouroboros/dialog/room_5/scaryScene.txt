@@ -1,23 +1,23 @@
 [enableDisplay]
-*scream* 
+*scream*
 Self: Jesus, what the hell is this?[waitForEnter]
-§: 	You have to walk through.[waitForEnter]
+???: 	You have to walk through.[waitForEnter]
 Self: No way! I'm not THAT crazy![waitForEnter]
-§: Trust me, you have to walk through. 
+???: Trust me, you have to walk through.
      Then you will finally reach me.[waitForEnter]
 [disableDisplay]
 [timeout:3]
 [enableDisplay]
 Self:	This is a damn SKULL! Why is a damn skull here??[waitForEnter]
-§: 	At a place like this it's pointless to ask "why". 
+???: 	At a place like this it's pointless to ask "why".
 	There is no "why".[waitForEnter]
 Self:	*What should I do?*
 
 [choice:"hesitate","accept"][waitForAnswer][jumpTo:1.#]
 [1.1]
 Self:	I don't want to. There must be another way.[waitForEnter]
-§: 	The door is sealed so it's the only way out.[waitForEnter] 
-§: 	Seems like you have no choice.[waitForEnter]
+???: 	The door is sealed so it's the only way out.[waitForEnter]
+???: 	Seems like you have no choice.[waitForEnter]
 [jumpTo:2]
 [1.2]
 Self:	I have no choice ... [waitForEnter]
@@ -30,7 +30,7 @@ Self:	*What should I do?*
 [choice:"hesitate","accept"][waitForAnswer][jumpTo:2.#]
 [2.1]
 Self: No. Just no. [waitForEnter]
-§: 	I have time. You will come like everyone else did.[waitForEnter]
+???: 	I have time. You will come like everyone else did.[waitForEnter]
 [disableDisplay]
 [returnMessage:endingDialogue2]
 [jumpTo:3]

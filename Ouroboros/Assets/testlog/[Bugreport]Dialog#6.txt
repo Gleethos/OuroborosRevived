@@ -1,0 +1,6 @@
+Bug Name: Dialog#6
+Wiederholbar: ya
+Raum: alle
+Beschreibung:
+Während die Dialogbox aktiv ist, kann das Inventar geöffnet werden. Dadurch wird der Dialog 
+überschrieben, danach kommt graue Schrift, wenn man Enter drückt.

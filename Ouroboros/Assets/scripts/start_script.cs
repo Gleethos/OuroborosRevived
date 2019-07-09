@@ -7,6 +7,6 @@ using UnityEngine.UI;
 public class start_script : MonoBehaviour {
 
 	public void load(string name){
-		Application.LoadLevel (name);
+		SceneManager.LoadScene (name);
 	}
 }

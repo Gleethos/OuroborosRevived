@@ -89,24 +89,24 @@ public class dialog_script : MonoBehaviour {
 			{
                 //Debug.Log ("Player has given an answer!");
 		 		waitingForAnswer = false;
-				if (Input.GetKeyDown (KeyCode.Keypad1)) {AnswerID = 1; Debug.Log ("Answer sent... 1");}
-				if (Input.GetKeyDown (KeyCode.Keypad2)) {AnswerID = 2; Debug.Log ("Answer sent... 2");}
-				if (Input.GetKeyDown (KeyCode.Keypad3)) {AnswerID = 3; Debug.Log ("Answer sent... 3");}
-				if (Input.GetKeyDown (KeyCode.Keypad4)) {AnswerID = 4; Debug.Log ("Answer sent... 4");}
-				if (Input.GetKeyDown (KeyCode.Keypad5)) {AnswerID = 5; Debug.Log ("Answer sent... 5");}
-				if (Input.GetKeyDown (KeyCode.Keypad6)) {AnswerID = 6; Debug.Log ("Answer sent... 6");}
-				if (Input.GetKeyDown (KeyCode.Keypad7)) {AnswerID = 7; Debug.Log ("Answer sent... 7");}
-				if (Input.GetKeyDown (KeyCode.Keypad8)) {AnswerID = 8; Debug.Log ("Answer sent... 8");}
-				if (Input.GetKeyDown (KeyCode.Keypad9)) {AnswerID = 9; Debug.Log ("Answer sent... 9");}
-				if (Input.GetKeyDown (KeyCode.Alpha1)) {AnswerID = 1; Debug.Log ("Answer sent... 1");}
-				if (Input.GetKeyDown (KeyCode.Alpha2)) {AnswerID = 2; Debug.Log ("Answer sent... 2");}
-				if (Input.GetKeyDown (KeyCode.Alpha3)) {AnswerID = 3; Debug.Log ("Answer sent... 3");}
-				if (Input.GetKeyDown (KeyCode.Alpha4)) {AnswerID = 4; Debug.Log ("Answer sent... 4");}
-				if (Input.GetKeyDown (KeyCode.Alpha5)) {AnswerID = 5; Debug.Log ("Answer sent... 5");}
-				if (Input.GetKeyDown (KeyCode.Alpha6)) {AnswerID = 6; Debug.Log ("Answer sent... 6");}
-				if (Input.GetKeyDown (KeyCode.Alpha7)) {AnswerID = 7; Debug.Log ("Answer sent... 7");}
-				if (Input.GetKeyDown (KeyCode.Alpha8)) {AnswerID = 8; Debug.Log ("Answer sent... 8");}
-				if (Input.GetKeyDown (KeyCode.Alpha9)) {AnswerID = 9; Debug.Log ("Answer sent... 9");}
+				if (Input.GetKeyDown (KeyCode.Keypad1)) {AnswerID = 1; /*Debug.Log ("Answer sent... 1");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad2)) {AnswerID = 2; /*Debug.Log ("Answer sent... 2");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad3)) {AnswerID = 3; /*Debug.Log ("Answer sent... 3");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad4)) {AnswerID = 4; /*Debug.Log ("Answer sent... 4");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad5)) {AnswerID = 5; /*Debug.Log ("Answer sent... 5");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad6)) {AnswerID = 6; /*Debug.Log ("Answer sent... 6");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad7)) {AnswerID = 7; /*Debug.Log ("Answer sent... 7");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad8)) {AnswerID = 8; /*Debug.Log ("Answer sent... 8");*/}
+				if (Input.GetKeyDown (KeyCode.Keypad9)) {AnswerID = 9; /*Debug.Log ("Answer sent... 9");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha1)) {AnswerID = 1; /*Debug.Log ("Answer sent... 1");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha2)) {AnswerID = 2; /*Debug.Log ("Answer sent... 2");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha3)) {AnswerID = 3; /*Debug.Log ("Answer sent... 3");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha4)) {AnswerID = 4; /*Debug.Log ("Answer sent... 4");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha5)) {AnswerID = 5; /*Debug.Log ("Answer sent... 5");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha6)) {AnswerID = 6; /*Debug.Log ("Answer sent... 6");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha7)) {AnswerID = 7; /*Debug.Log ("Answer sent... 7");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha8)) {AnswerID = 8; /*Debug.Log ("Answer sent... 8");*/}
+				if (Input.GetKeyDown (KeyCode.Alpha9)) {AnswerID = 9; /*Debug.Log ("Answer sent... 9");*/}
 				if (AnswerID > globalChoiceCount) {
 					waitingForAnswer = true;
 				} else {
@@ -381,7 +381,7 @@ public class dialog_script : MonoBehaviour {
 
 			}
 
-			Debug.Log ("Current valuePart y: " + currentValuePart);
+			//Debug.Log ("Current valuePart y: " + currentValuePart);
 			if (float.TryParse (currentValuePart, out y)) {
 				//dialogAusgabe.text = currentLine;
 				//Debug.Log ("y initiated by dialog script!");

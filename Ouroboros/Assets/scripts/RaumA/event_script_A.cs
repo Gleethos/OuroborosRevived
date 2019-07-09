@@ -11,10 +11,10 @@ public class event_script_A : Eventscript {
 	private float speed;
 	int eventCounter=0;
 
-	door_script exitDoor;
-	player_script player;
-	event_script_R1 nextEventScript;
-	dialog_script dialogManager;
+	private door_script exitDoor;
+	private player_script player;
+	private event_script_R1 nextEventScript;
+	private dialog_script dialogManager;
 	[SerializeField]
 	private GameObject victim;
 	private GameObject playerCameraObject;
@@ -23,10 +23,10 @@ public class event_script_A : Eventscript {
 	public Camera victimCamera;
 	private bool fallingState = false;
 	private SpriteRenderer victimSprite;
-	ColliderListener teddy;
-	ColliderListener wife;
-	ColliderListener basketball;
-	ColliderListener armchair;
+	private ColliderListener teddy;
+	private ColliderListener wife;
+	private ColliderListener basketball;
+	private ColliderListener armchair;
 	private bool tState = false;
 	private bool aState = false;
 	private bool bState = false;
@@ -34,11 +34,10 @@ public class event_script_A : Eventscript {
 	private SpriteRenderer aDark;
 	private SpriteRenderer r1Dark;
 
-	GameObject audio;
+	private GameObject audio;
 
-	// Use this for initialization
+	
 	void Start () {
-        //Debug.Log("Event script for room A initialized!");
         isActive = true;
         exitDoor = GameObject.FindWithTag ("Exit_A").GetComponent<door_script>();
 
@@ -53,7 +52,7 @@ public class event_script_A : Eventscript {
 		victimCamera = victimCameraObject.GetComponent<Camera> ();
 		victimSprite = victim.GetComponentInChildren (typeof(SpriteRenderer)) as SpriteRenderer;
 
-		//Items Collider
+		//... Items Collider
 		teddy = GameObject.FindWithTag ("my teddy").GetComponent<ColliderListener> ();
 		wife = GameObject.FindWithTag ("my wife").GetComponent<ColliderListener> ();
 		armchair = GameObject.FindWithTag ("my armchair").GetComponent<ColliderListener> ();
@@ -63,10 +62,10 @@ public class event_script_A : Eventscript {
 	
 	}
 
-	// Update is called once per frame
+	
 	void Update () {
 
-		// Items Dialog
+		//... Items 
 		if (teddy.getColliderStateEnter() == true){
 			tState = true;
 		}
@@ -81,10 +80,9 @@ public class event_script_A : Eventscript {
 			wState = true;
 
 		}
-		//Debug.Log ("This is wState: " + wState);
+
 		if(wState && Input.GetKeyDown(KeyCode.F)){
 			dialogManager.setDialog ("wife.txt");
-			//Debug.Log ("DialogManager finish");
 		}
 		if (wife.getColliderStateExit () == true) {
 			wState = false;
@@ -176,7 +174,6 @@ public class event_script_A : Eventscript {
 			{
 				if(exitDoor.isLocked())
 				{
-					File.Delete("dialog/room_A/ItemHolder.txt");
 
 					aDark = GameObject.Find ("anfangsraumD").GetComponent<SpriteRenderer>();
 					aDark.enabled = true;
@@ -190,7 +187,6 @@ public class event_script_A : Eventscript {
 
 	}
     void endAndProceed() {
-        //Debug.Log ("Event script for room 2 is now ending it's procedure.\n");
         isActive = false;
         nextEventScript.activate ();
     }

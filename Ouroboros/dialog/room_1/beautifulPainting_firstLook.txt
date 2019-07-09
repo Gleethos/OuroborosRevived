@@ -1,2 +1,5 @@
+[freeze]
 [enableDisplay]
 Self: I remember this painting! I know it from my childhood![waitForEnter]
+[disableDisplay]
+[unfreeze]
