@@ -37,6 +37,9 @@ public class event_script_A : Eventscript {
 
 	
 	void Start () {
+
+        Setup();
+
         isActive = true;
         exitDoor = GameObject.FindWithTag ("Exit_A").GetComponent<door_script>();
         

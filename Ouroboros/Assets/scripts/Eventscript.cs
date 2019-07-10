@@ -10,7 +10,7 @@ public class Eventscript : MonoBehaviour
     protected float centerY = 0;
     protected PlayerController player;
 
-    protected Eventscript() {
+    protected void Setup() {
         player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
     }
 

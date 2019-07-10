@@ -24,7 +24,10 @@ public class event_script_R2 : Eventscript {
     ColliderListener event1;
 
 	void Start () {
-		exitDoor = GameObject.FindWithTag ("Exit_R2").GetComponent<door_script>();
+
+        Setup();
+
+        exitDoor = GameObject.FindWithTag ("Exit_R2").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R2").GetComponent<door_script>();
         
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R3)) as event_script_R3;

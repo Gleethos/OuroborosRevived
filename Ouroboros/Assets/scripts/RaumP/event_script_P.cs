@@ -36,9 +36,11 @@ public class event_script_P : Eventscript {
 
 	// Use this for initialization
 	void Start () {
-		//Debug.Log("Event script for room P initialized!");
-	
-		npc = GameObject.FindObjectOfType (typeof(npc_script)) as npc_script;
+
+        Setup();
+        //Debug.Log("Event script for room P initialized!");
+
+        npc = GameObject.FindObjectOfType (typeof(npc_script)) as npc_script;
 		npc_object = GameObject.FindWithTag ("NPC");
 		NPC2 = GameObject.FindWithTag ("NPC2").GetComponentInChildren(typeof(SpriteRenderer)) as SpriteRenderer;
 		walking = npc_object.GetComponentInChildren(typeof(Animator)) as Animator;

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class item_script : MonoBehaviour {
-	private PlayerController spieler;
+	private PlayerController player;
 	private bool entry = false;
 	string item;
 
 	void Start () {
 		
-		spieler = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
+		player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
 
 	}
 	
@@ -17,7 +17,7 @@ public class item_script : MonoBehaviour {
 		if (entry) {
 			if (Input.GetKeyDown (KeyCode.F)) {
 				item = this.tag;
-				spieler.SetItemHolder(item);
+				player.SetItemHolder(item);
 				Destroy (gameObject);
 			}
 		}

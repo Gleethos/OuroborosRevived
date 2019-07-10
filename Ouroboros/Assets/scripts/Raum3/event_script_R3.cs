@@ -36,8 +36,11 @@ public class event_script_R3 : Eventscript {
 
 	// Use this for initialization
 	void Start () {
-		//Debug.Log("Event script for room 3 initialized!");
-		exitDoor = GameObject.FindWithTag ("Exit_R3").GetComponent<door_script>();
+
+        Setup();
+
+        //Debug.Log("Event script for room 3 initialized!");
+        exitDoor = GameObject.FindWithTag ("Exit_R3").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R3").GetComponent<door_script>();
         
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R4)) as event_script_R4;

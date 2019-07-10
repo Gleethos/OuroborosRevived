@@ -37,11 +37,13 @@ public class ScriptReader : MonoBehaviour {
 	public Text dialogAusgabe;
 	AudioSource audio;
 	AudioClip clip;
-	public Image display; 
+	public Image display;
+    GameStateController gamestate;
 
-	// Use this for initialization
-	void Start () {
-		player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
+    // Use this for initialization
+    void Start () {
+        gamestate = GameObject.FindObjectOfType(typeof(GameStateController)) as GameStateController;
+        player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
 		dialogAusgabe = GetComponentInChildren (typeof(Text)) as Text;
 		display = GetComponentInChildren (typeof(Image)) as Image;
 		display.enabled = false;
@@ -49,10 +51,8 @@ public class ScriptReader : MonoBehaviour {
 		//setDialog ("");
 		loadAndPlaySoundFile("MyCave.wav", "room_A");
 	}
-	
 	// Update is called once per frame
 	void Update () {
-			
 		//Checking if there is no dialog set... if there is:
 		//checking if a new dialog is set to be loaded!
 		if (rawDialog == "" && stopped == false) {
@@ -67,7 +67,6 @@ public class ScriptReader : MonoBehaviour {
 				//display.enabled = true;
 			}
 		} 
-
 		if(waitingForEnter==true){
 			if(Input.GetKeyDown (KeyCode.Return))
 		  	   {waitingForEnter = false;
@@ -116,7 +115,6 @@ public class ScriptReader : MonoBehaviour {
 					globalChoiceCount = 0;}
 			}
 		}
-
 		//If a dialog is set and it is not paused (because of timeout for example)
 		//->new interpretation starts!
 		if (rawDialog != "" && paused == false && waitingForEnter == false && waitingForAnswer==false) {
@@ -138,8 +136,7 @@ public class ScriptReader : MonoBehaviour {
 							currentDialogPayload = "";
 						} else {
 							if (jumpToString == "") 
-								{
-							
+							{
 								if (i > 1) {
 									if (rawDialog [i - 1] == ']'||rawDialog [i - 2] == ']') {
 										if (rawDialog [i] != '\n') {
@@ -151,11 +148,11 @@ public class ScriptReader : MonoBehaviour {
 										currentLine += rawDialog [i];
 									}
 								} else {
-									currentLine += rawDialog [i];}
-							
+									currentLine += rawDialog [i];
+                                }
 								currentDialogPayload += rawDialog [i];
-								}
-							}					   
+							}
+						}					   
 				//IS COMMAND
 				//========================================================
 				} else if (isCommand == true) {
@@ -178,9 +175,13 @@ public class ScriptReader : MonoBehaviour {
 
 				//rekursive jumpToString search! (Warning! Can cause endless loop!)
 				if(jumpToString!="")
-				   {if(i==rawDialog.Length-1){i=0;
+				{
+                    if (i==rawDialog.Length-1)
+                    {
+                        i =0;
                         //Debug.Log("Interpreter is restarting loop now! (jumpTo message not found!)");
-					}}
+					}
+                }
 			}
 			//Debug.Log ("End of dialog char loop reached! dialog index: "+dialogIndex);
 			rawDialog = "";//Interpretation is done! rawDialog empty now!
@@ -189,7 +190,7 @@ public class ScriptReader : MonoBehaviour {
 			currentLine = "";
 			dialogIndex = 0;
 		} 
-			dialogtxt = "";
+		dialogtxt = "";
 		if(paused==false && rawDialog=="" && waitingForEnter==false && waitingForAnswer==false){end = true;
             //Debug.Log ("Dialog exited!");
         }
@@ -199,6 +200,10 @@ public class ScriptReader : MonoBehaviour {
 	//===================================================
 	private void executeMetaCommand(string metaCommand)
 	{
+        if (gamestate!=null && metaCommand.Contains(".")) {
+            gamestate.executeStateCommand(metaCommand);
+            return;
+        }
         string[] parsed = metaCommand.Split(':');
 		string command = parsed[0];
         string value = (parsed.Length > 1) ? parsed[1] :"";
