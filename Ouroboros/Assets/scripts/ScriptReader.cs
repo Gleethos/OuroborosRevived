@@ -5,6 +5,7 @@ using UnityEditor;
 using System.IO;
 using UnityEngine.UI;
 using System.Globalization;
+using System;
 
 public class ScriptReader : MonoBehaviour {
 
@@ -19,7 +20,6 @@ public class ScriptReader : MonoBehaviour {
 	private int    read = 0;
 	private int    scriptDepth=0;
 	private int globalChoiceCount = 0;
-	private StreamReader reader;
 
 	private bool paused = false;
 	private bool waitingForEnter= false;
@@ -39,6 +39,10 @@ public class ScriptReader : MonoBehaviour {
 	AudioClip clip;
 	public Image display;
     GameStateController gamestate;
+    
+    private Dictionary<string, Func<string>> Functions;
+
+    private bool isDropping = false;
 
     // Use this for initialization
     void Start () {
@@ -47,18 +51,49 @@ public class ScriptReader : MonoBehaviour {
 		dialogAusgabe = GetComponentInChildren (typeof(Text)) as Text;
 		display = GetComponentInChildren (typeof(Image)) as Image;
 		display.enabled = false;
-		//setRoom ("");
-		//setDialog ("");
+
+        Functions = new Dictionary<string, Func<string>>();
+
+        //Functions[""]
+        
 		loadAndPlaySoundFile("MyCave.wav", "room_A");
 	}
-	// Update is called once per frame
-	void Update () {
+
+    public void DropScript()
+    {
+        isDropping = true;
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        if (isDropping) {
+            isDropping = false;
+            dialogtxt = "";
+            command = "";
+            room = "";
+            rawDialog = "";
+            currentLine = "";
+            dialogIndex = 0;
+            read = 0;
+            scriptDepth = 0;
+            globalChoiceCount = 0;
+            //reader;
+            paused = false;
+            waitingForEnter = false;
+            waitingForAnswer = false;
+            AnswerID = 0;
+            jumpToString = "";
+            dialogOutputString = "";
+            end = false;
+            stopped = false;
+            return;
+        }
 		//Checking if there is no dialog set... if there is:
 		//checking if a new dialog is set to be loaded!
 		if (rawDialog == "" && stopped == false) {
 			if (dialogtxt != "") {
 				string path = "dialog/" + subdirectory + "/" + dialogtxt;
-
 				StreamReader reader = new StreamReader (path);// CREATING STREAM READER
 				rawDialog = reader.ReadToEnd ();//========================================>>> READING TXT FILE!
 				reader.Close ();//Closing stream reader...
@@ -70,7 +105,11 @@ public class ScriptReader : MonoBehaviour {
 		if(waitingForEnter==true){
 			if(Input.GetKeyDown (KeyCode.Return))
 		  	   {waitingForEnter = false;
-				if(rawDialog.Length<dialogIndex){if(rawDialog[dialogIndex]=='\n'){dialogIndex++;}}
+				if(rawDialog.Length<dialogIndex){
+                    if (rawDialog[dialogIndex]=='\n'){
+                        dialogIndex++;
+                    }
+                }
 				if(rawDialog == ""){
                     //Debug.Log ("raw dialog empty!");
                 } else{
@@ -87,7 +126,7 @@ public class ScriptReader : MonoBehaviour {
 		if(waitingForAnswer==true){
 			//Debug.Log ("waiting! ...for answer");
 			if(Input.GetKeyDown (KeyCode.Keypad1) || Input.GetKeyDown (KeyCode.Keypad2) || Input.GetKeyDown (KeyCode.Keypad3) || Input.GetKeyDown (KeyCode.Keypad4) || Input.GetKeyDown (KeyCode.Keypad5) 
-				|| Input.GetKeyDown (KeyCode.Alpha1)  || Input.GetKeyDown (KeyCode.Alpha2) || Input.GetKeyDown (KeyCode.Alpha3) || Input.GetKeyDown (KeyCode.Alpha4) || Input.GetKeyDown (KeyCode.Alpha5))
+			|| Input.GetKeyDown (KeyCode.Alpha1)  || Input.GetKeyDown (KeyCode.Alpha2)  || Input.GetKeyDown (KeyCode.Alpha3)  || Input.GetKeyDown (KeyCode.Alpha4)  || Input.GetKeyDown (KeyCode.Alpha5))
 			{
                 //Debug.Log ("Player has given an answer!");
 		 		waitingForAnswer = false;
@@ -123,36 +162,35 @@ public class ScriptReader : MonoBehaviour {
 			string currentMetaCommand = "";
 			dialogOutputString = "";
 			bool isCommand = false;
-
 			for (int i = dialogIndex; i < rawDialog.Length; i++)//looping through the raw dialog content!
 			{
 				//IS NOT COMMAND
 				//========================================================
 				if (isCommand == false) {
-						if (rawDialog [i] == '[') {
-							isCommand = true; scriptDepth++;
-							//Debug.Log ("Dialog payload:" + currentDialogPayload);
-							//currentLine += currentDialogPayload;
-							currentDialogPayload = "";
-						} else {
-							if (jumpToString == "") 
-							{
-								if (i > 1) {
-									if (rawDialog [i - 1] == ']'||rawDialog [i - 2] == ']') {
-										if (rawDialog [i] != '\n') {
-											currentLine += rawDialog [i];
-										} else {
-										//Debug.Log ("Enter sign ignored at index: "+i);
-                                        }
-									} else {
+					if (rawDialog [i] == '[') {
+						isCommand = true; scriptDepth++;
+						//Debug.Log ("Dialog payload:" + currentDialogPayload);
+						//currentLine += currentDialogPayload;
+						currentDialogPayload = "";
+					} else {
+						if (jumpToString == "") 
+						{
+							if (i > 1) {
+								if (rawDialog [i - 1] == ']'||rawDialog [i - 2] == ']') {
+									if (rawDialog [i] != '\n') {
 										currentLine += rawDialog [i];
-									}
+									} else {
+									//Debug.Log ("Enter sign ignored at index: "+i);
+                                    }
 								} else {
 									currentLine += rawDialog [i];
-                                }
-								currentDialogPayload += rawDialog [i];
-							}
-						}					   
+								}
+							} else {
+								currentLine += rawDialog [i];
+                            }
+							currentDialogPayload += rawDialog [i];
+						}
+					}					   
 				//IS COMMAND
 				//========================================================
 				} else if (isCommand == true) {
@@ -172,7 +210,6 @@ public class ScriptReader : MonoBehaviour {
 					} 
 					else {currentMetaCommand += rawDialog [i];}
 				}//========================================================
-
 				//rekursive jumpToString search! (Warning! Can cause endless loop!)
 				if(jumpToString!="")
 				{
@@ -191,11 +228,12 @@ public class ScriptReader : MonoBehaviour {
 			dialogIndex = 0;
 		} 
 		dialogtxt = "";
-		if(paused==false && rawDialog=="" && waitingForEnter==false && waitingForAnswer==false){end = true;
+		if(paused==false && rawDialog=="" && waitingForEnter==false && waitingForAnswer==false)
+        {
+            end = true;
             //Debug.Log ("Dialog exited!");
         }
 	}
-
 	//Executing commands found in txt files:
 	//===================================================
 	private void executeMetaCommand(string metaCommand)
@@ -227,25 +265,20 @@ public class ScriptReader : MonoBehaviour {
 		if (command == "timeout") {
 			float time = 0;
 			if (float.TryParse (value, NumberStyles.Any, CultureInfo.InvariantCulture, out time)) {
-				//dialogAusgabe.text = currentLine;
-				//Debug.Log ("Timout initiated by dialog script!");
 				StartCoroutine (timeoutFor (time));
 			} else {
-				//Debug.Log ("Dialog command 'timeout' failed!");
+				Debug.Log ("Dialog command 'timeout' failed!");
 			}
-		 dialogAusgabe.text = currentLine;
+		    dialogAusgabe.text = currentLine;
 		}
 		//===================================================
 		else if (command == "playsound") {
-			//Debug.Log ("Playsound command executing! ->filename: "+value);
 			loadAndPlaySoundFile (value, subdirectory);
-
 		}
 		//===================================================
 		else if (command == "unlockExit") {
 			if (currentExitDoor != null) {
 				currentExitDoor.setIsLocked ();
-				//Debug.Log ("Exit unlocked through dialog script!");
 			}
 		}
 		//===================================================
@@ -256,7 +289,6 @@ public class ScriptReader : MonoBehaviour {
 			string currentChoice = "";
 			bool isChoice = false;
 			int choiceCounter = 0;
-
 			for (int i = 0; i < value.Length; i++) {
 				if (isChoice == true) {
 					if (value [i] == '"') {
@@ -269,7 +301,6 @@ public class ScriptReader : MonoBehaviour {
 					} else {
 						currentChoice += value [i];
 					}
-
 				} else {
 					if (value [i] == '"') {
 						isChoice = true;
@@ -319,7 +350,6 @@ public class ScriptReader : MonoBehaviour {
 			float x = 0;
 			float y = 0;
 			string currentValuePart = "";
-
 			for (int i = 0; i < value.Length; i++) {				
 				if (check == false) {
 					if (value [i] != ',') {
@@ -343,16 +373,13 @@ public class ScriptReader : MonoBehaviour {
 				}
 
 			}
-
 			//Debug.Log ("Current valuePart y: " + currentValuePart);
 			if (float.TryParse (currentValuePart, NumberStyles.Any, CultureInfo.InvariantCulture, out y)) {
 				//dialogAusgabe.text = currentLine;
 				//Debug.Log ("y initiated by dialog script!");
-
 			} else {
 				//Debug.Log ("Dialog command 'movePlayerTo' failed!");
 			}
-
 			player.MoveTo (x, y);
 			currentValuePart = "";
 			check = true;
@@ -362,9 +389,7 @@ public class ScriptReader : MonoBehaviour {
 			float x = 0;
 			float y = 0;
 			string currentValuePart = "";
-
 			for (int i = 0; i < value.Length; i++) {
-
 				if (check == false) {
 					if (value [i] != ',') {
 						currentValuePart += value [i];
@@ -373,7 +398,6 @@ public class ScriptReader : MonoBehaviour {
 						if (float.TryParse (currentValuePart, NumberStyles.Any, CultureInfo.InvariantCulture, out x)) {
 							//dialogAusgabe.text = currentLine;
 							//Debug.Log ("x initiated by dialog script!");
-
 						} else {
 							//Debug.Log ("Dialog command 'movePlayerTo' failed!");
 						}
@@ -385,32 +409,25 @@ public class ScriptReader : MonoBehaviour {
 						currentValuePart += value [i];
 					} 
 				}
-
 			}
-
 			//Debug.Log ("Current valuePart y: " + currentValuePart);
 			if (float.TryParse (currentValuePart, NumberStyles.Any, CultureInfo.InvariantCulture, out y)) {
 				//dialogAusgabe.text = currentLine;
 				//Debug.Log ("y initiated by dialog script!");
-
 			} else {
 				//Debug.Log ("Dialog command 'movePlayerRelative' failed!");
 			}
 			//Debug.Log ("Player is being moved by vector: " + x + ", " + y + ";");
 			player.MoveRelative (x, y);
-
 		}//===================================================
 		else if (command == "returnMessage") {
 			dialogOutputString = value;
-
 		}//===================================================
 		else if (command == "enableDisplay") {
 			display.enabled = true;
-
 		}//===================================================
 		else if (command == "disableDisplay") {
 			display.enabled = false;
-
 		} else if (command == "exitDialog") {
 			//Debug.Log ("Dialog has been ended by meta command! dialog index: " + dialogIndex);
 			rawDialog = "";//Interpretation is done! rawDialog empty now!
@@ -434,32 +451,26 @@ public class ScriptReader : MonoBehaviour {
     }
 	//Pauses interpretation process...
 	//==========================================================================
-
 	public void setCurrentExitDoor(door_script exit){
-		currentExitDoor = exit;}
-
+		currentExitDoor = exit;
+    }
 	public void setRoom(string room){
 		subdirectory = room;
 	}
-
 	public void setDialog(string dialog){
 		dialogtxt = dialog;
 	}
-
 	public bool readEnd() {
 		bool done = end;
 		end = false;
 		return done;
 	}
-
 	public int getAnswerId(){
 		return AnswerID;
     }
-
 	public void resetAnswerID(){
 		AnswerID = 0;
     }
-
 	public bool isActive(){
 		if(rawDialog==""){
             return false;
@@ -467,50 +478,40 @@ public class ScriptReader : MonoBehaviour {
             return true;
         }
     }
-		
 	public string getDialogOutput (){
 		return dialogOutputString;
     }
-
 	public void setDialogOutputTo(string newOutput){
 		dialogOutputString = newOutput;
     }
-
 	private void loadAndPlaySoundFile(string filename, string subdirectoryName)
 	{
 		audio = GetComponent<AudioSource>();
 		//AUDIO
 		string path = "file://" + Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("/")) + "/Assets/dialog/"+subdirectoryName+"/"+filename;
 		//Debug.Log ("Loading soundfile due to dialog script request. Loading file at path: "+path);
-
 		WWW www = new WWW(path);
 		//Getting the clip from local files....
 		clip = www.GetAudioClip();
-
 		if(clip==null){
             Debug.Log ("Audio file cold not be loaded. Audio clip empty... :/");
         }
 		else{
             Debug.Log("Loading successful.");
         }
-
 		//Clip name:
 		clip.name = filename;
-
 		//clip.LoadAudioData ();
 		audio.playOnAwake = false;
 		audio.loop = false;
 		audio.clip = clip;
-
 		//audio.PlayOneShot (clip);
-
 		if (!audio.isPlaying)
 		{
             //Debug.Log ("Audiofile is being played now.");
 			audio.Play();
 		}
 		//audio.PlayOneShot (clip);
-
 	}
 
 }
