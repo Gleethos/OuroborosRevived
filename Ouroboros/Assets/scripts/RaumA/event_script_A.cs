@@ -9,7 +9,7 @@ public class event_script_A : Eventscript {
 	private new readonly float centerX = -0.29f;
 	private new readonly float centerY = -11.79f;
 	private float speed;
-	int eventCounter=0;
+	
 
 	private door_script exitDoor;
 	private event_script_R1 nextEventScript;
@@ -37,9 +37,7 @@ public class event_script_A : Eventscript {
 
 	
 	void Start () {
-
         Setup();
-
         isActive = true;
         exitDoor = GameObject.FindWithTag ("Exit_A").GetComponent<door_script>();
         

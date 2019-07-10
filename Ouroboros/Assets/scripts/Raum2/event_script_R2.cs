@@ -8,7 +8,7 @@ public class event_script_R2 : Eventscript {
 	private new readonly float centerX = -11.03f;
 	private new readonly float centerY = -4.78f;
 
-	private int eventCounter=0;
+	
 
 	private door_script exitDoor;
 	private door_script entryDoor;
@@ -24,9 +24,7 @@ public class event_script_R2 : Eventscript {
     ColliderListener event1;
 
 	void Start () {
-
         Setup();
-
         exitDoor = GameObject.FindWithTag ("Exit_R2").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R2").GetComponent<door_script>();
         

@@ -8,8 +8,7 @@ public class event_script_R3 : Eventscript {
 
 	private new readonly float centerX = 0f;
 	private new readonly float centerY = 11.69f;
-
-	int eventCounter=0;
+    
 
 	door_script exitDoor;
 	door_script entryDoor;
@@ -33,13 +32,11 @@ public class event_script_R3 : Eventscript {
 	GameObject audio;
 
 
-
-	// Use this for initialization
+    
 	void Start () {
-
+        
         Setup();
-
-        //Debug.Log("Event script for room 3 initialized!");
+      
         exitDoor = GameObject.FindWithTag ("Exit_R3").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R3").GetComponent<door_script>();
         

@@ -9,9 +9,14 @@ public class Eventscript : MonoBehaviour
     protected float centerX = 0;
     protected float centerY = 0;
     protected PlayerController player;
-
+    protected int eventCounter = 0;
+    
     protected void Setup() {
         player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
+    }
+    
+    public void ResetEventCounter() {
+        eventCounter = 0;
     }
 
     public void Unsolve() {

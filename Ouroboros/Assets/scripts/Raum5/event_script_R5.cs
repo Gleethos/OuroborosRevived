@@ -8,7 +8,6 @@ public class event_script_R5 : Eventscript {
 	private new readonly float centerX = 11.8f;
 	private new readonly float centerY = -4.68f;
 
-	int eventCounter=0;
 
 	darkness_script exitDoor;
 	door_script entryDoor;
@@ -23,12 +22,11 @@ public class event_script_R5 : Eventscript {
 
 
 
-	// Use this for initialization
+	
 	void Start () {
-
+        
         Setup();
-
-        //Debug.Log("Event script for room 5 initialized!");
+        
         exitDoor = GameObject.FindWithTag ("Exit_R5").GetComponent<darkness_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R5").GetComponent<door_script>();
         

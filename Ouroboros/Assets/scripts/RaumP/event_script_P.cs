@@ -10,7 +10,6 @@ public class event_script_P : Eventscript {
 	private new readonly float centerY = -4.78f;
 
 	
-	int eventCounter=0;
 	ColliderListener event1;
 	private SpriteRenderer NPC2;
 	float delay = 5f;
@@ -34,11 +33,11 @@ public class event_script_P : Eventscript {
 
 
 
+<<<<<<< HEAD
 	// Use this for initialization
 	void Start () {
 
         Setup();
-        //Debug.Log("Event script for room P initialized!");
 
         npc = GameObject.FindObjectOfType (typeof(npc_script)) as npc_script;
 		npc_object = GameObject.FindWithTag ("NPC");
@@ -159,8 +158,7 @@ public class event_script_P : Eventscript {
 
 
             if (roomSolved) {
-
-                File.Delete ("dialog/room_P/ItemHolder.txt");
+                
                 endAndProceed ();
 
             }
