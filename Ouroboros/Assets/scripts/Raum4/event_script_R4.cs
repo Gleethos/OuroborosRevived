@@ -18,8 +18,7 @@ public class event_script_R4 : Eventscript {
 
 	door_script exitDoor;
 	door_script entryDoor;
-
-	PlayerController player;
+    
 	event_script_R5 nextEventScript;
 	ScriptReader dialogManager;
 	bildchange_script beautifulPainting;
@@ -38,8 +37,7 @@ public class event_script_R4 : Eventscript {
 		//Debug.Log("Event script for room 4 initialized!");
 		exitDoor = GameObject.FindWithTag ("Exit_R4").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R4").GetComponent<door_script>();
-
-		player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
+        
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R5)) as event_script_R5;
 		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 

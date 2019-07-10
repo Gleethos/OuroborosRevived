@@ -12,8 +12,7 @@ public class event_script_R5 : Eventscript {
 
 	darkness_script exitDoor;
 	door_script entryDoor;
-
-	player_script player;
+    
 	event_script_P nextEventScript;
 	ScriptReader dialogManager;
 	bildchange_script beautifulPainting;
@@ -29,8 +28,7 @@ public class event_script_R5 : Eventscript {
 		//Debug.Log("Event script for room 5 initialized!");
 		exitDoor = GameObject.FindWithTag ("Exit_R5").GetComponent<darkness_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R5").GetComponent<door_script>();
-
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+        
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_P)) as event_script_P;
 		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		event1 = GameObject.FindWithTag ("Event1").GetComponent<ColliderListener> ();
@@ -45,19 +43,19 @@ public class event_script_R5 : Eventscript {
 		if(isActive)
 		{
 			dialogManager.setRoom ("room_5");
-			player.setRoom ("room_5");
+			player.SetRoom ("room_5");
 
 			switch (eventCounter) {
 			case 0:
 				if (event1.getColliderStateEnter () == true) {
 					
-						audio.GetComponent<AudioSource> ().Play ();
+					audio.GetComponent<AudioSource> ().Play ();
 
-					player.freeze ();
+					player.Freeze ();
 					dialogManager.setDialog ("beforeTheEnd.txt");
 				}
 				if (dialogManager.getDialogOutput () == "endingDialogue") {
-					player.unfreeze ();
+					player.Unfreeze ();
 					eventCounter++;
 				}
 
@@ -65,11 +63,11 @@ public class event_script_R5 : Eventscript {
 
 			case 1:
 				if (event2.getColliderStateEnter () == true) {
-					player.freeze ();
+					player.Freeze ();
 					dialogManager.setDialog ("scaryScene.txt");
 				} 
 				if (dialogManager.getDialogOutput () == "endingDialogue2") {
-					player.unfreeze ();
+					player.Unfreeze ();
 					eventCounter++;
 				}
 

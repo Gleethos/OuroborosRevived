@@ -13,8 +13,7 @@ public class event_script_R1 : Eventscript {
 
 	private door_script exitDoor;
 	private door_script entryDoor;
-
-	private player_script player;
+    
 	private event_script_R2 nextEventScript;
 	private ScriptReader dialogManager;
 	private bildchange_script beautifulPainting;
@@ -29,11 +28,10 @@ public class event_script_R1 : Eventscript {
 
 	
 	void Start () {
-		
+        
 		exitDoor = GameObject.FindWithTag ("Exit_R1").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R1").GetComponent<door_script>();
-
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+   
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R2)) as event_script_R2;
 		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		beautifulPainting = GameObject.FindObjectOfType (typeof(bildchange_script)) as bildchange_script;
@@ -51,7 +49,7 @@ public class event_script_R1 : Eventscript {
         if (isActive)
 		{	
 			dialogManager.setRoom ("room_1");
-			player.setRoom ("room_1");
+			player.SetRoom ("room_1");
 
             //Debug.Log ("ExitState: " + event1.getColliderStateExit () + "EnterState: " + event1.getColliderStateEnter ());
 

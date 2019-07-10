@@ -13,8 +13,7 @@ public class event_script_R3 : Eventscript {
 
 	door_script exitDoor;
 	door_script entryDoor;
-
-	player_script player;
+    
 	event_script_R4 nextEventScript;
 	ScriptReader dialogManager;
 	bildchange_script beautifulPainting;
@@ -40,8 +39,7 @@ public class event_script_R3 : Eventscript {
 		//Debug.Log("Event script for room 3 initialized!");
 		exitDoor = GameObject.FindWithTag ("Exit_R3").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R3").GetComponent<door_script>();
-
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+        
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R4)) as event_script_R4;
 		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		event1 = GameObject.FindWithTag ("Bridge_Start").GetComponent<ColliderListener> ();
@@ -58,14 +56,14 @@ public class event_script_R3 : Eventscript {
 		if(isActive)
 		{
 			dialogManager.setRoom ("room_3");
-			player.setRoom ("room_3");
+			player.SetRoom ("room_3");
 
 			switch (eventCounter) {
 			case 0:
 				if (event1.getColliderStateEnter ()) {
-					player.freeze ();
+					player.Freeze ();
 
-					if (player.getFirstItem () != null) {
+					if (player.GetFirstItem () != null) {
 						//Debug.Log ("FirstIsntHere");
 						dialogManager.setDialog ("someitems.txt");
 						firstTime = false;
@@ -104,7 +102,7 @@ public class event_script_R3 : Eventscript {
 					} else if (timeCounter > 3.5f) {
 						spieler.transform.localScale = new Vector3 (0.025f, 0.025f, 1f);
 						timeCounter = 0f;
-						player.setSpeed (1f);
+						player.Movementspeed = (1f);
 						collider.enabled = true;
 						//player.unfreeze ();
 						dialogManager.setDialogOutputTo ("");
@@ -113,7 +111,7 @@ public class event_script_R3 : Eventscript {
 					timeCounter += Time.deltaTime;
 				}
 				if (dialogManager.getDialogOutput () == "delete") {
-					player.deleteIventory ();
+					player.DeleteIventory ();
 				}
 				if (dialogManager.getDialogOutput () == "endDialog") {
 					//Debug.Log ("endDialog = true");
@@ -121,7 +119,7 @@ public class event_script_R3 : Eventscript {
 				}
 
 				if (dialogManager.getDialogOutput () == "unfreeze") {
-					player.unfreeze ();
+					player.Unfreeze ();
 					dialogManager.setDialogOutputTo("");
 				}
 				if (dialogManager.isActive () == false && endDialog ) {
@@ -133,7 +131,7 @@ public class event_script_R3 : Eventscript {
 				break;
 
 			case 1:
-				player.unfreeze ();
+				player.Unfreeze ();
 				eventCounter++;
 
 				break;

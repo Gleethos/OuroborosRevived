@@ -8,7 +8,11 @@ public class Eventscript : MonoBehaviour
     protected bool roomSolved = false;
     protected float centerX = 0;
     protected float centerY = 0;
+    protected PlayerController player;
 
+    protected Eventscript() {
+        player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
+    }
 
     public void activate() {
         isActive = true;
