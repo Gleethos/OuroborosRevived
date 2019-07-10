@@ -6,7 +6,7 @@
 ???: Do you want this? [waitForEnter]
 ???: Yes, please ...[waitForEnter]
 [disableDisplay]
-[movePlayerRelative:0,3]
+[movePlayerRelative:0,2.55]
 [timeout:4]
 [enableDisplay]
 ???: I CAN'T! I CAN'T FOR GODS SAKE![waitForEnter]
