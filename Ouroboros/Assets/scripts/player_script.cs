@@ -60,7 +60,7 @@ public class player_script : MonoBehaviour {
 				StartCoroutine (displayItemHolder ());
 			} else if (Input.GetKeyDown (KeyCode.X)) {
 				
-				dialog.dialogAusgabe.text = "";
+				dialog.dialogOutput.text = "";
 				dialog.display.enabled = false;
 
 			}
@@ -356,9 +356,9 @@ IEnumerator displayItemHolder(){
 			}
 		}
 
-		dialog.dialogAusgabe.text = "Memories\n";
+		dialog.dialogOutput.text = "Memories\n";
         if(itemHolder.Length > 0)
-		    dialog.dialogAusgabe.text += "| " + dialogtxt;
+		    dialog.dialogOutput.text += "| " + dialogtxt;
 
 		yield return new WaitForSecondsRealtime (10);
 		

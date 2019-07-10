@@ -6,10 +6,12 @@ using System.IO;
 using UnityEngine.UI;
 
 public class dialog_script : MonoBehaviour {
-	private string unterverzeichnis;
+
+	private string subdirectory;
 	private string dialogtxt="";
-	private string befehl; 
+	private string command; 
 	private string room = "";
+
 	private string rawDialog = "";
 	private string currentLine = "";
 	private int    dialogIndex = 0;
@@ -24,14 +26,14 @@ public class dialog_script : MonoBehaviour {
 	private int  AnswerID=0;
 	private string jumpToString = "";
 
-	private string dialogOutput = "";
+	private string dialogOutputString = "";
 
 	private bool end = false;
 	public bool stopped = false;
 
 	private player_script player;
 	private door_script currentExitDoor;
-	public Text dialogAusgabe;
+	public Text dialogOutput;
 	AudioSource audio;
 	AudioClip clip;
 	public Image display; 
@@ -39,7 +41,7 @@ public class dialog_script : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
-		dialogAusgabe = GetComponentInChildren (typeof(Text)) as Text;
+		dialogOutput = GetComponentInChildren (typeof(Text)) as Text;
 		display = GetComponentInChildren (typeof(Image)) as Image;
 		display.enabled = false;
 		//setRoom ("");
@@ -54,7 +56,7 @@ public class dialog_script : MonoBehaviour {
 		//checking if a new dialog is set to be loaded!
 		if (rawDialog == "" && stopped == false) {
 			if (dialogtxt != "") {
-				string path = "dialog/" + unterverzeichnis + "/" + dialogtxt;
+				string path = "dialog/" + subdirectory + "/" + dialogtxt;
 
 				StreamReader reader = new StreamReader (path);// CREATING STREAM READER
 				rawDialog = reader.ReadToEnd ();//========================================>>> READING TXT FILE!
@@ -120,7 +122,7 @@ public class dialog_script : MonoBehaviour {
 			//display.enabled = true;
 			string currentDialogPayload = "";
 			string currentMetaCommand = "";
-			dialogOutput = "";
+			dialogOutputString = "";
 			bool isCommand = false;
 
 			for (int i = dialogIndex; i < rawDialog.Length; i++)//looping through the raw dialog content!
@@ -182,7 +184,7 @@ public class dialog_script : MonoBehaviour {
 			//Debug.Log ("End of dialog char loop reached! dialog index: "+dialogIndex);
 			rawDialog = "";//Interpretation is done! rawDialog empty now!
 			display.enabled = false;
-			dialogAusgabe.text = "";
+			dialogOutput.text = "";
 			currentLine = "";
 			dialogIndex = 0;
 		} 
@@ -226,12 +228,12 @@ public class dialog_script : MonoBehaviour {
 			} else {
 				//Debug.Log ("Dialog command 'timeout' failed!");
 			}
-		 dialogAusgabe.text = currentLine;
+		 dialogOutput.text = currentLine;
 		}
 		//===================================================
 		else if (command == "playsound") {
 			//Debug.Log ("Playsound command executing! ->filename: "+value);
-			loadAndPlaySoundFile (value, unterverzeichnis);
+			loadAndPlaySoundFile (value, subdirectory);
 
 		}
 		//===================================================
@@ -272,7 +274,7 @@ public class dialog_script : MonoBehaviour {
 			currentLine += content;
 		}//===================================================
 		else if (command == "waitForAnswer") {
-			dialogAusgabe.text = currentLine;
+			dialogOutput.text = currentLine;
 			currentLine = "";
 			waitingForAnswer = true;
 		}//=================================================== 
@@ -303,7 +305,7 @@ public class dialog_script : MonoBehaviour {
 			player.unfreeze ();
 		}//===================================================
 		else if (command == "waitForEnter") {
-			dialogAusgabe.text = currentLine;
+			dialogOutput.text = currentLine;
 			currentLine = "";
 			waitingForEnter = true;
 		}//===================================================
@@ -394,7 +396,7 @@ public class dialog_script : MonoBehaviour {
 
 		}//===================================================
 		else if (command == "returnMessage") {
-			dialogOutput = value;
+			dialogOutputString = value;
 
 		}//===================================================
 		else if (command == "enableDisplay") {
@@ -408,7 +410,7 @@ public class dialog_script : MonoBehaviour {
 			//Debug.Log ("Dialog has been ended by meta command! dialog index: " + dialogIndex);
 			rawDialog = "";//Interpretation is done! rawDialog empty now!
 			display.enabled = false;
-			dialogAusgabe.text = "";
+			dialogOutput.text = "";
 			currentLine = "";
 			dialogIndex = 0;
 			dialogtxt = "";
@@ -428,7 +430,7 @@ public class dialog_script : MonoBehaviour {
 		currentExitDoor = exit;}
 
 	public void setRoom(string room){
-		unterverzeichnis = room;
+		subdirectory = room;
 	}
 
 	public void setDialog(string dialog){
@@ -451,10 +453,10 @@ public class dialog_script : MonoBehaviour {
 		if(rawDialog==""){return false;}else{return true;}}
 		
 	public string getDialogOutput (){
-		return dialogOutput;}
+		return dialogOutputString;}
 
 	public void setDialogOutputTo(string newOutput){
-		dialogOutput = newOutput;}
+		dialogOutputString = newOutput;}
 
 	private void loadAndPlaySoundFile(string filename, string subdirectoryName)
 	{
