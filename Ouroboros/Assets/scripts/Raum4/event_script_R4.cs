@@ -13,13 +13,11 @@ public class event_script_R4 : Eventscript {
 	private float defaultPlayerSpeed;
 
 	float distanceToEscape = 100;
-
-	int eventCounter=0;
+    
 
 	door_script exitDoor;
 	door_script entryDoor;
-
-	PlayerController player;
+    
 	event_script_R5 nextEventScript;
 	ScriptReader dialogManager;
 	bildchange_script beautifulPainting;
@@ -33,19 +31,20 @@ public class event_script_R4 : Eventscript {
 
 
 
-	// Use this for initialization
+	
 	void Start () {
-		//Debug.Log("Event script for room 4 initialized!");
-		exitDoor = GameObject.FindWithTag ("Exit_R4").GetComponent<door_script>();
-		entryDoor = GameObject.FindWithTag ("Entry_R4").GetComponent<door_script>();
+        Setup ();
 
-		player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
+        exitDoor = GameObject.FindWithTag ("Exit_R4").GetComponent<door_script>();
+		entryDoor = GameObject.FindWithTag ("Entry_R4").GetComponent<door_script>();
+        
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R5)) as event_script_R5;
 		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 
 		mud = GameObject.FindObjectOfType (typeof(mud_script)) as mud_script;
 		mudSwitch = GameObject.FindObjectOfType (typeof(switch_script)) as switch_script;
 		colliderE = GameObject.Find ("Collider [R4] Lightning").GetComponent<PolygonCollider2D> ();
+       
 		defaultPlayerSpeed = player.Movementspeed;
 		mud.drain();
 
@@ -53,7 +52,7 @@ public class event_script_R4 : Eventscript {
 
 	}
 
-	// Update is called once per frame
+	
 	void Update () {
 
 		if(mudSwitch.isSwitchedOn()){mud.fill (); colliderE.enabled = false;}
@@ -147,7 +146,6 @@ public class event_script_R4 : Eventscript {
 				{
 					//GetComponent<AudioSource> ().enabled = false;
 					player.Movementspeed = (defaultPlayerSpeed);
-					File.Delete("dialog/room_4/ItemHolder.txt");
 					r4Dark = GameObject.Find ("raum4D").GetComponent<SpriteRenderer>();
 					r4Dark.enabled = true;
 					r5Dark = GameObject.Find ("raum5D").GetComponent<SpriteRenderer>();
@@ -170,7 +168,7 @@ public class event_script_R4 : Eventscript {
 	{
         //Debug.Log ("Event script for room 4 is now ending it's procedure.\n");
 		isActive = false;
-		nextEventScript.activate ();
+		nextEventScript.Activate ();
 	}
 
 	private float drainedPlayerSpeed(float pX, float pY, float speed)

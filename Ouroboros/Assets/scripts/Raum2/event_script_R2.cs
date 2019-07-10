@@ -8,12 +8,11 @@ public class event_script_R2 : Eventscript {
 	private new readonly float centerX = -11.03f;
 	private new readonly float centerY = -4.78f;
 
-	private int eventCounter=0;
+	
 
 	private door_script exitDoor;
 	private door_script entryDoor;
-
-	private player_script player;
+    
 	private event_script_R3 nextEventScript;
 	private ScriptReader dialogManager;
 	private bildchange_script beautifulPainting;
@@ -25,10 +24,10 @@ public class event_script_R2 : Eventscript {
     ColliderListener event1;
 
 	void Start () {
-		exitDoor = GameObject.FindWithTag ("Exit_R2").GetComponent<door_script>();
+        Setup ();
+        exitDoor = GameObject.FindWithTag ("Exit_R2").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R2").GetComponent<door_script>();
-
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+        
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R3)) as event_script_R3;
 		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 
@@ -40,7 +39,7 @@ public class event_script_R2 : Eventscript {
 		if(isActive)
 		{
 			dialogManager.setRoom ("room_2");
-			player.setRoom ("room_2");
+			player.SetRoom ("room_2");
 
 			switch (eventCounter) {
 			case 0:
@@ -62,7 +61,7 @@ public class event_script_R2 : Eventscript {
 				    dialogManager.setDialog ("areYouAngry.txt");
 				    if(dialogManager.getDialogOutput()=="selfIsCalm"){
 					    eventCounter++;
-					    player.unfreeze ();
+					    player.Unfreeze ();
 				    }
 				    eventCounter++;
 				    break;
@@ -106,7 +105,7 @@ public class event_script_R2 : Eventscript {
 	{
         //Debug.Log ("Event script for room 2 is now ending it's procedure.\n");
 		isActive = false;
-		nextEventScript.activate ();
+		nextEventScript.Activate ();
 	}
 
 }

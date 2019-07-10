@@ -10,13 +10,10 @@ public class event_script_P : Eventscript {
 	private new readonly float centerY = -4.78f;
 
 	
-	int eventCounter=0;
 	ColliderListener event1;
 	private SpriteRenderer NPC2;
 	float delay = 5f;
 
-
-	player_script player;
 	npc_script npc;
 	private GameObject npc_object;
 	private Animator walking;
@@ -36,13 +33,11 @@ public class event_script_P : Eventscript {
 
 
 
-	// Use this for initialization
-	void Start () {
-		//Debug.Log("Event script for room P initialized!");
 	
+	void Start () {
+        Setup ();
 
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
-		npc = GameObject.FindObjectOfType (typeof(npc_script)) as npc_script;
+        npc = GameObject.FindObjectOfType (typeof(npc_script)) as npc_script;
 		npc_object = GameObject.FindWithTag ("NPC");
 		NPC2 = GameObject.FindWithTag ("NPC2").GetComponentInChildren(typeof(SpriteRenderer)) as SpriteRenderer;
 		walking = npc_object.GetComponentInChildren(typeof(Animator)) as Animator;
@@ -65,7 +60,7 @@ public class event_script_P : Eventscript {
 
         if (isActive) {
             dialogManager.setRoom ("room_P");
-            player.setRoom ("room_P");
+            player.SetRoom ("room_P");
 
             switch (eventCounter) {
                 case 0:
@@ -77,7 +72,7 @@ public class event_script_P : Eventscript {
                 case 1:
 
                     if (event1.getColliderStateEnter () == true) {
-                        player.freeze ();
+                        player.Freeze ();
                         dialogManager.setDialog ("First_Meeting.txt");
 
                     }

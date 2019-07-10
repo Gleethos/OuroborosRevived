@@ -9,10 +9,9 @@ public class event_script_A : Eventscript {
 	private new readonly float centerX = -0.29f;
 	private new readonly float centerY = -11.79f;
 	private float speed;
-	int eventCounter=0;
+	
 
 	private door_script exitDoor;
-	private PlayerController player;
 	private event_script_R1 nextEventScript;
 	private ScriptReader dialogManager;
 	[SerializeField]
@@ -38,11 +37,10 @@ public class event_script_A : Eventscript {
 
 	
 	void Start () {
+        Setup ();
         isActive = true;
         exitDoor = GameObject.FindWithTag ("Exit_A").GetComponent<door_script>();
-
-
-		player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
+        
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R1)) as event_script_R1;
 		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		victim = GameObject.FindWithTag ("Victim");
@@ -188,7 +186,7 @@ public class event_script_A : Eventscript {
 	}
     void endAndProceed() {
         isActive = false;
-        nextEventScript.activate ();
+        nextEventScript.Activate ();
     }
 
 }
