@@ -33,7 +33,7 @@ public class dialog_script : MonoBehaviour {
 
 	private player_script player;
 	private door_script currentExitDoor;
-	public Text dialogOutput;
+	public Text dialogAusgabe;
 	AudioSource audio;
 	AudioClip clip;
 	public Image display; 
@@ -41,7 +41,7 @@ public class dialog_script : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
-		dialogOutput = GetComponentInChildren (typeof(Text)) as Text;
+		dialogAusgabe = GetComponentInChildren (typeof(Text)) as Text;
 		display = GetComponentInChildren (typeof(Image)) as Image;
 		display.enabled = false;
 		//setRoom ("");
@@ -184,7 +184,7 @@ public class dialog_script : MonoBehaviour {
 			//Debug.Log ("End of dialog char loop reached! dialog index: "+dialogIndex);
 			rawDialog = "";//Interpretation is done! rawDialog empty now!
 			display.enabled = false;
-			dialogOutput.text = "";
+			dialogAusgabe.text = "";
 			currentLine = "";
 			dialogIndex = 0;
 		} 
@@ -228,7 +228,7 @@ public class dialog_script : MonoBehaviour {
 			} else {
 				//Debug.Log ("Dialog command 'timeout' failed!");
 			}
-		 dialogOutput.text = currentLine;
+		 dialogAusgabe.text = currentLine;
 		}
 		//===================================================
 		else if (command == "playsound") {
@@ -274,7 +274,7 @@ public class dialog_script : MonoBehaviour {
 			currentLine += content;
 		}//===================================================
 		else if (command == "waitForAnswer") {
-			dialogOutput.text = currentLine;
+			dialogAusgabe.text = currentLine;
 			currentLine = "";
 			waitingForAnswer = true;
 		}//=================================================== 
@@ -305,7 +305,7 @@ public class dialog_script : MonoBehaviour {
 			player.unfreeze ();
 		}//===================================================
 		else if (command == "waitForEnter") {
-			dialogOutput.text = currentLine;
+			dialogAusgabe.text = currentLine;
 			currentLine = "";
 			waitingForEnter = true;
 		}//===================================================
@@ -410,7 +410,7 @@ public class dialog_script : MonoBehaviour {
 			//Debug.Log ("Dialog has been ended by meta command! dialog index: " + dialogIndex);
 			rawDialog = "";//Interpretation is done! rawDialog empty now!
 			display.enabled = false;
-			dialogOutput.text = "";
+			dialogAusgabe.text = "";
 			currentLine = "";
 			dialogIndex = 0;
 			dialogtxt = "";
