@@ -54,7 +54,6 @@ public class dialog_script_old : MonoBehaviour {
 		if (rawDialog == "" && stopped == false) {
 			if (dialogtxt != "") {
 				string path = "dialog/" + unterverzeichnis + "/" + dialogtxt;
-
 				StreamReader reader = new StreamReader (path);// CREATING STREAM READER
 				rawDialog = reader.ReadToEnd ();//========================================>>> READING TXT FILE!
 				reader.Close ();//Closing stream reader...
@@ -63,7 +62,7 @@ public class dialog_script_old : MonoBehaviour {
 				//display.enabled = true;
 			}
 		} 
-
+        // Waiting for answer:
 		if(waitingForEnter==true){
 			if(Input.GetKeyDown (KeyCode.Return))
 		  	   {waitingForEnter = false;
@@ -206,7 +205,6 @@ public class dialog_script_old : MonoBehaviour {
 		else if (command == "playsound") {
 			//Debug.Log ("Playsound command executing! ->filename: "+value);
 			loadAndPlaySoundFile (value, unterverzeichnis);
-
 		}
 		//===================================================
 		else if (command == "unlockExit") {
@@ -309,12 +307,10 @@ public class dialog_script_old : MonoBehaviour {
 				}
 
 			}
-
 			//Debug.Log ("Current valuePart y: " + currentValuePart);
 			if (float.TryParse (currentValuePart, out y)) {
 				//dialogAusgabe.text = currentLine;
 				//Debug.Log ("y initiated by dialog script!");
-
 			} else {
 				//Debug.Log ("Dialog command 'movePlayerTo' failed!");
 			}
@@ -394,7 +390,11 @@ public class dialog_script_old : MonoBehaviour {
 	// timeout 
 	//==========================================================================
 	//Timeout function: 
-	IEnumerator timeoutFor(float time){paused = true; yield return new WaitForSeconds(time); paused = false;}
+	IEnumerator timeoutFor(float time){
+        paused = true;
+        yield return new WaitForSeconds(time);
+        paused = false;
+    }
 	//Pauses interpretation process...
 	//==========================================================================
 

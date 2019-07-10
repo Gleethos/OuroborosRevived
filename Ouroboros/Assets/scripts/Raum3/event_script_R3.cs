@@ -16,7 +16,7 @@ public class event_script_R3 : Eventscript {
 
 	player_script player;
 	event_script_R4 nextEventScript;
-	dialog_script dialogManager;
+	ScriptReader dialogManager;
 	bildchange_script beautifulPainting;
 	bild_script scaryPainting;
 	ColliderListener event1;
@@ -43,7 +43,7 @@ public class event_script_R3 : Eventscript {
 
 		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R4)) as event_script_R4;
-		dialogManager = GameObject.FindObjectOfType (typeof(dialog_script)) as dialog_script;
+		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		event1 = GameObject.FindWithTag ("Bridge_Start").GetComponent<ColliderListener> ();
 		planken = GameObject.FindWithTag ("Panken");
 		spieler = GameObject.FindWithTag ("Player");

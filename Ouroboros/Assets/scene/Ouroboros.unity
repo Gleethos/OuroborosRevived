@@ -1161,6 +1161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopped: 0
+  player: {fileID: 1448766156}
   dialogAusgabe: {fileID: 0}
   display: {fileID: 0}
 --- !u!82 &184070083
@@ -1679,7 +1680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &251982136
 Transform:
   m_ObjectHideFlags: 0
@@ -10312,10 +10313,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1448766152}
-  - component: {fileID: 1448766153}
   - component: {fileID: 1448766154}
   - component: {fileID: 1448766155}
   - component: {fileID: 1448766157}
+  - component: {fileID: 1448766156}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -10339,25 +10340,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1448766153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448766151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8492c17f0bdabf4abec5b8b8f7e73ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  idle_bild: {fileID: 21300000, guid: 8638c222450e4cb4abd9a4891bcd2423, type: 3}
-  controlDelete: 0
-  dialogAusgabe: {fileID: 0}
-  display: {fileID: 0}
-  lockX: 0
-  lockY: 0
 --- !u!58 &1448766154
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10395,6 +10377,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1448766156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448766151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b0198acb01d940429ea9d942f0292a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ms: 2
+  idle: {fileID: 21300000, guid: 8638c222450e4cb4abd9a4891bcd2423, type: 3}
 --- !u!82 &1448766157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11945,7 +11941,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 22.565311, y: -105.13764}
+  m_AnchoredPosition: {x: 22.56543, y: -105.13764}
   m_SizeDelta: {x: 2302.476, y: 320.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1576825089

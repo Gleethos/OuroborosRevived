@@ -16,7 +16,7 @@ public class event_script_R1 : Eventscript {
 
 	private player_script player;
 	private event_script_R2 nextEventScript;
-	private dialog_script dialogManager;
+	private ScriptReader dialogManager;
 	private bildchange_script beautifulPainting;
 	private bild_script scaryPainting;
 	private SpriteRenderer r2Dark;
@@ -35,7 +35,7 @@ public class event_script_R1 : Eventscript {
 
 		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R2)) as event_script_R2;
-		dialogManager = GameObject.FindObjectOfType (typeof(dialog_script)) as dialog_script;
+		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		beautifulPainting = GameObject.FindObjectOfType (typeof(bildchange_script)) as bildchange_script;
 		scaryPainting = GameObject.FindObjectOfType (typeof(bild_script)) as bild_script;
 	}

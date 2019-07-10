@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 using UnityEngine.UI;
+using System.Globalization;
 
-public class dialog_script : MonoBehaviour {
+public class ScriptReader : MonoBehaviour {
 
 	private string subdirectory;
 	private string dialogtxt="";
@@ -31,7 +32,7 @@ public class dialog_script : MonoBehaviour {
 	private bool end = false;
 	public bool stopped = false;
 
-	private player_script player;
+	private PlayerController player;
 	private door_script currentExitDoor;
 	public Text dialogAusgabe;
 	AudioSource audio;
@@ -40,7 +41,7 @@ public class dialog_script : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+		player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
 		dialogAusgabe = GetComponentInChildren (typeof(Text)) as Text;
 		display = GetComponentInChildren (typeof(Image)) as Image;
 		display.enabled = false;
@@ -198,22 +199,21 @@ public class dialog_script : MonoBehaviour {
 	//===================================================
 	private void executeMetaCommand(string metaCommand)
 	{
-		bool isValue = false;
-		string command = "";
-		string value = "";
-		for (int i = 0; i < metaCommand.Length; i++) {
-			if (metaCommand [i] == ':') {
-				isValue = true;
-			} else {
-				if (isValue == false) {
-					command += metaCommand [i];
-				}
-				if (isValue == true) {
-					value += metaCommand [i];
-				}
-			}
-
-		}
+        string[] parsed = metaCommand.Split(':');
+		string command = parsed[0];
+        string value = (parsed.Length > 1) ? parsed[1] :"";
+        bool isValue = (parsed.Length > 1) ? true : false ;
+        
+        if (value.Contains(",")) {
+            parsed = value.Split(',');
+            value = "";
+            for(int i=0; i<parsed.Length; i++) {
+                value += parsed[i];
+                if (i < (parsed.Length - 1)) {
+                    value += ",";
+                }
+            }
+        }
 		//Debug.Log ("Command: " + command);
 		//Debug.Log ("Value: " + value);
 
@@ -221,7 +221,7 @@ public class dialog_script : MonoBehaviour {
 		//===================================================
 		if (command == "timeout") {
 			float time = 0;
-			if (float.TryParse (value, out time)) {
+			if (float.TryParse (value, NumberStyles.Any, CultureInfo.InvariantCulture, out time)) {
 				//dialogAusgabe.text = currentLine;
 				//Debug.Log ("Timout initiated by dialog script!");
 				StartCoroutine (timeoutFor (time));
@@ -291,18 +291,18 @@ public class dialog_script : MonoBehaviour {
 		}//===================================================
 		else if (command == "freezeFor") {
 			int time = 0;
-			if (int.TryParse (value, out time)) {
-				player.setFreezeFor (time);
+			if (int.TryParse (value, NumberStyles.Any, CultureInfo.InvariantCulture, out time)) {
+				player.SetFreezeFor (time);
 				//Debug.Log ("Player frozen through dialog script!");
 			} else {
 				//Debug.Log ("Dialog command 'freezeFor' failed!");
 			}
 		}//===================================================
 		else if (command == "freeze") {
-			player.freeze();
+			player.Freeze();
 		}//===================================================
 		else if (command == "unfreeze") {
-			player.unfreeze ();
+			player.Unfreeze();
 		}//===================================================
 		else if (command == "waitForEnter") {
 			dialogAusgabe.text = currentLine;
@@ -321,7 +321,7 @@ public class dialog_script : MonoBehaviour {
 						currentValuePart += value [i];
 					} else {
 						//Debug.Log ("Current valuePart x: " + currentValuePart);
-						if (float.TryParse (currentValuePart, out x)) {
+						if (float.TryParse (currentValuePart, NumberStyles.Any, CultureInfo.InvariantCulture, out x)) {
 							//dialogAusgabe.text = currentLine;
 							//Debug.Log ("x initiated by dialog script!");
 
@@ -340,7 +340,7 @@ public class dialog_script : MonoBehaviour {
 			}
 
 			//Debug.Log ("Current valuePart y: " + currentValuePart);
-			if (float.TryParse (currentValuePart, out y)) {
+			if (float.TryParse (currentValuePart, NumberStyles.Any, CultureInfo.InvariantCulture, out y)) {
 				//dialogAusgabe.text = currentLine;
 				//Debug.Log ("y initiated by dialog script!");
 
@@ -348,7 +348,7 @@ public class dialog_script : MonoBehaviour {
 				//Debug.Log ("Dialog command 'movePlayerTo' failed!");
 			}
 
-			player.moveTo (x, y);
+			player.MoveTo (x, y);
 			currentValuePart = "";
 			check = true;
 		}//===================================================
@@ -365,7 +365,7 @@ public class dialog_script : MonoBehaviour {
 						currentValuePart += value [i];
 					} else {
 						//Debug.Log ("Current valuePart x: " + currentValuePart);
-						if (float.TryParse (currentValuePart, out x)) {
+						if (float.TryParse (currentValuePart, NumberStyles.Any, CultureInfo.InvariantCulture, out x)) {
 							//dialogAusgabe.text = currentLine;
 							//Debug.Log ("x initiated by dialog script!");
 
@@ -384,7 +384,7 @@ public class dialog_script : MonoBehaviour {
 			}
 
 			//Debug.Log ("Current valuePart y: " + currentValuePart);
-			if (float.TryParse (currentValuePart, out y)) {
+			if (float.TryParse (currentValuePart, NumberStyles.Any, CultureInfo.InvariantCulture, out y)) {
 				//dialogAusgabe.text = currentLine;
 				//Debug.Log ("y initiated by dialog script!");
 
@@ -392,7 +392,7 @@ public class dialog_script : MonoBehaviour {
 				//Debug.Log ("Dialog command 'movePlayerRelative' failed!");
 			}
 			//Debug.Log ("Player is being moved by vector: " + x + ", " + y + ";");
-			player.moveRelative (x, y);
+			player.MoveRelative (x, y);
 
 		}//===================================================
 		else if (command == "returnMessage") {
@@ -422,7 +422,11 @@ public class dialog_script : MonoBehaviour {
 	// timeout 
 	//==========================================================================
 	//Timeout function: 
-	IEnumerator timeoutFor(float time){paused = true; yield return new WaitForSeconds(time); paused = false;}
+	IEnumerator timeoutFor(float time){
+        paused = true;
+        yield return new WaitForSeconds(time);
+        paused = false;
+    }
 	//Pauses interpretation process...
 	//==========================================================================
 
@@ -444,19 +448,28 @@ public class dialog_script : MonoBehaviour {
 	}
 
 	public int getAnswerId(){
-		return AnswerID;}
+		return AnswerID;
+    }
 
 	public void resetAnswerID(){
-		AnswerID = 0;}
+		AnswerID = 0;
+    }
 
 	public bool isActive(){
-		if(rawDialog==""){return false;}else{return true;}}
+		if(rawDialog==""){
+            return false;
+        } else{
+            return true;
+        }
+    }
 		
 	public string getDialogOutput (){
-		return dialogOutputString;}
+		return dialogOutputString;
+    }
 
 	public void setDialogOutputTo(string newOutput){
-		dialogOutputString = newOutput;}
+		dialogOutputString = newOutput;
+    }
 
 	private void loadAndPlaySoundFile(string filename, string subdirectoryName)
 	{
@@ -470,10 +483,10 @@ public class dialog_script : MonoBehaviour {
 		clip = www.GetAudioClip();
 
 		if(clip==null){
-            //Debug.Log ("Audio file cold not be loaded. Audio clip empty... :/");
+            Debug.Log ("Audio file cold not be loaded. Audio clip empty... :/");
         }
 		else{
-            //Debug.Log("Loading successful.");
+            Debug.Log("Loading successful.");
         }
 
 		//Clip name:

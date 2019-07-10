@@ -11,7 +11,7 @@ public class camera_script : MonoBehaviour {
 	event_script_R3 room3;
 	event_script_R4 room4;
 	event_script_R5 room5;
-	player_script player;
+	PlayerController player;
 	private GameObject playerCameraObject;
 	public Camera playerCamera;
 
@@ -24,7 +24,7 @@ public class camera_script : MonoBehaviour {
 		room4 = GameObject.FindObjectOfType (typeof(event_script_R4)) as event_script_R4;
 		room5 = GameObject.FindObjectOfType (typeof(event_script_R5)) as event_script_R5;
 
-		player =GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+		player =GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
 		playerCameraObject = GameObject.FindWithTag ("MainCamera");
 		playerCamera = playerCameraObject.GetComponent<Camera> ();
 
@@ -41,43 +41,43 @@ public class camera_script : MonoBehaviour {
 
 		if
 			(roomA.roomIsActive())
-		{a = roomA.getCenterX()-player.getX();
-			b = roomA.getCenterY()-player.getY();
+		{a = roomA.getCenterX()-player.GetX;
+			b = roomA.getCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2f, 1f);
 		}
 		else if 
 			(room1.roomIsActive())
-		{a = room1.getCenterX()-player.getX();
-			b = room1.getCenterY()-player.getY();
+		{a = room1.getCenterX()-player.GetX;
+			b = room1.getCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 1f, 1f);
 		}
 		else if 
 			(room2.roomIsActive())
-		{a = room2.getCenterX()-player.getX();
-			b = room2.getCenterY()-player.getY();
+		{a = room2.getCenterX()-player.GetX;
+			b = room2.getCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 1f, 1f);
 		}
 		else if 
 			(room3.roomIsActive())
-		{a = room3.getCenterX()-player.getX();
-			b = room3.getCenterY()-player.getY();
+		{a = room3.getCenterX()-player.GetX;
+			b = room3.getCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2f, 0.7f);
 		}
 		else if 
 			(room4.roomIsActive())
-		{a = room4.getCenterX()-player.getX();
-			b = room4.getCenterY()-player.getY();
+		{a = room4.getCenterX()-player.GetX;
+			b = room4.getCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2f, 0.6f);
 		}
 		else if 
 			(room5.roomIsActive())
-		{a = room5.getCenterX()-player.getX();
-			b = room5.getCenterY()-player.getY();
+		{a = room5.getCenterX()-player.GetX;
+			b = room5.getCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2f, 1.1f);
 		}

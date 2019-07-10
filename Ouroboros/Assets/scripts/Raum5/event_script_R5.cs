@@ -15,7 +15,7 @@ public class event_script_R5 : Eventscript {
 
 	player_script player;
 	event_script_P nextEventScript;
-	dialog_script dialogManager;
+	ScriptReader dialogManager;
 	bildchange_script beautifulPainting;
 	bild_script scaryPainting;
 	ColliderListener event1;
@@ -32,7 +32,7 @@ public class event_script_R5 : Eventscript {
 
 		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_P)) as event_script_P;
-		dialogManager = GameObject.FindObjectOfType (typeof(dialog_script)) as dialog_script;
+		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		event1 = GameObject.FindWithTag ("Event1").GetComponent<ColliderListener> ();
 		event2 = GameObject.FindWithTag ("Event2").GetComponent<ColliderListener> ();
 		audio = GameObject.Find ("EventManager_R5");

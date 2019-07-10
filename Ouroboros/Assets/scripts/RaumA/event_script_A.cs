@@ -12,9 +12,9 @@ public class event_script_A : Eventscript {
 	int eventCounter=0;
 
 	private door_script exitDoor;
-	private player_script player;
+	private PlayerController player;
 	private event_script_R1 nextEventScript;
-	private dialog_script dialogManager;
+	private ScriptReader dialogManager;
 	[SerializeField]
 	private GameObject victim;
 	private GameObject playerCameraObject;
@@ -42,9 +42,9 @@ public class event_script_A : Eventscript {
         exitDoor = GameObject.FindWithTag ("Exit_A").GetComponent<door_script>();
 
 
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+		player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R1)) as event_script_R1;
-		dialogManager = GameObject.FindObjectOfType (typeof(dialog_script)) as dialog_script;
+		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		victim = GameObject.FindWithTag ("Victim");
 		playerCameraObject = GameObject.FindWithTag ("MainCamera");
 		victimCameraObject = GameObject.FindWithTag ("Camera2");
@@ -111,13 +111,13 @@ public class event_script_A : Eventscript {
 		if(isActive)
 		{	
 			dialogManager.setRoom ("room_A");
-			player.setRoom ("room_A");
+			player.SetRoom ("room_A");
 
 
 			switch (eventCounter) {
 			case 0:
 
-				player.freeze ();
+				player.Freeze ();
 				dialogManager.setDialog ("thebeginning.txt");
 				eventCounter++;
 				break;
@@ -159,7 +159,7 @@ public class event_script_A : Eventscript {
 				}
 				if (dialogManager.getDialogOutput () == "endingDialogue") {
 					audio.GetComponent<AudioSource> ().Play ();
-					player.unfreeze ();
+					player.Unfreeze ();
 					roomSolved = true;
 					eventCounter++;
 				}
