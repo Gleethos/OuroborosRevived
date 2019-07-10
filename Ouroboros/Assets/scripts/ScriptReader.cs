@@ -200,7 +200,7 @@ public class ScriptReader : MonoBehaviour {
 	//===================================================
 	private void executeMetaCommand(string metaCommand)
 	{
-        if (gamestate!=null && metaCommand.Contains(".")) {
+        if (gamestate!=null && metaCommand.Contains(".") && !metaCommand.Contains(":")) {
             gamestate.executeStateCommand(metaCommand);
             return;
         }
