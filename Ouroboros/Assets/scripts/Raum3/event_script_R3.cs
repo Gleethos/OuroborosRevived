@@ -184,7 +184,7 @@ public class event_script_R3 : Eventscript {
 	{
         //Debug.Log ("Event script for room 3 is now ending it's procedure.\n");
 		isActive = false;
-		nextEventScript.activate ();
+		nextEventScript.Activate ();
 	}
 
 	

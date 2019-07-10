@@ -170,7 +170,7 @@ public class event_script_R1 : Eventscript {
 	}
     void endAndProceed() {
         isActive = false;
-        nextEventScript.activate ();
+        nextEventScript.Activate ();
     }
 
 }

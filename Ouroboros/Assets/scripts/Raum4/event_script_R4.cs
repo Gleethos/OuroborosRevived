@@ -168,7 +168,7 @@ public class event_script_R4 : Eventscript {
 	{
         //Debug.Log ("Event script for room 4 is now ending it's procedure.\n");
 		isActive = false;
-		nextEventScript.activate ();
+		nextEventScript.Activate ();
 	}
 
 	private float drainedPlayerSpeed(float pX, float pY, float speed)

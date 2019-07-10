@@ -185,7 +185,7 @@ public class event_script_A : Eventscript {
 	}
     void endAndProceed() {
         isActive = false;
-        nextEventScript.activate ();
+        nextEventScript.Activate ();
     }
 
 }

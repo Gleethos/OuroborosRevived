@@ -14,7 +14,7 @@ public class Jenny_test_script : MonoBehaviour {
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_P)) as event_script_P;
 		R3EventScript = GameObject.FindObjectOfType (typeof(event_script_R2)) as event_script_R2;
 		//nextEventScript.activate ();
-		R3EventScript.activate();
+		R3EventScript.Activate();
 		// Test No. 1
 		//objekt.moveRelative(0,0);
 

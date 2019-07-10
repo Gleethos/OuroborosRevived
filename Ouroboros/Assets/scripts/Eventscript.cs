@@ -14,22 +14,34 @@ public class Eventscript : MonoBehaviour
         player = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
     }
 
-    public void activate() {
+    public void Unsolve() {
+        roomSolved = false;
+    }
+
+    public void Solve() {
+        roomSolved = true;
+    }
+
+    public void Deactivate() {
+        isActive = false;
+    }
+
+    public void Activate() {
         isActive = true;
     }
 
-    public bool roomIsSolved() {
+    public bool RoomIsSolved() {
         return roomSolved;
     }
 
-    public bool roomIsActive() {
+    public bool RoomIsActive() {
         return isActive;
     }
 
-    public float getCenterX() {
+    public float GetCenterX() {
         return centerX;
     }
-    public float getCenterY() {
+    public float GetCenterY() {
         return centerY;
     }
 }
