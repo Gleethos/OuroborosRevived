@@ -1,0 +1,5 @@
+Bug Name: MoveRelative übernimmt keine Dezimalzahlen
+Wiederholbar: ya
+Raum: alle
+Beschreibung:
+Aus 2.5 wird 25 gemacht, er kann also keine Dezimalzahlen verarbeiten.

@@ -1,4 +1,3 @@
-[timeout:3]
 [enableDisplay]
 [freeze]
 Self: What is this here...[waitForEnter]
@@ -7,7 +6,7 @@ Self: This is crazy. [timeout:1]What... [timeout:1]How...[timeout:1] How deep is
 
 [1.1]
 Self: HEEYY! YOU! Up there! Talk to me!
-§: .[timeout:1].[timeout:1].[timeout:1]Yes.[waitForEnter][1.2.2.2.0]
+???: .[timeout:1].[timeout:1].[timeout:1]Yes.[waitForEnter][1.2.2.2.0]
 [choice:"Tell me! Where am I really?","Tell me! Who are you really?","Who was that person..."][waitForAnswer][jumpTo:1.1.#]
 
 [===][1.1.1]
@@ -18,49 +17,51 @@ Self: HEEYY! YOU! Up there! Talk to me!
 [===]Self: Who was that person[timeout:1].[timeout:1].[timeout:1]. falling...[waitForEnter][jumpTo:1.2]
 
 [1.2]
-§: You should know that.[waitForEnter]
+???: You should know that.[waitForEnter]
 [choice:"What? How?","You don't know me.","What stupid kind of answer is that?"][waitForAnswer][jumpTo:1.2.#]
 
 [===][1.2.1]
 [===]Self: What? How?[waitForEnter]
-[===]§: [timeout:1].[timeout:1].[timeout:1].[timeout:1] Just think![waitForEnter]
+[===]???: [timeout:1].[timeout:1].[timeout:1].[timeout:1] Just think![waitForEnter]
 [===]Self: Ah great! So I do already know? Well great. Oh and did you know that YOU are in fact a rocket scientist?[waitForEnter]
-[===]§: You are doing this wrong my friend.[waitForEnter][jumpTo:1.2.3]
+[===]???: You are doing this wrong my friend.[waitForEnter][jumpTo:1.2.3]
 [===][1.2.2]
 [===]Self: You don't know me.[waitForEnter]
-[===]§: [timeout:1].[timeout:1].[timeout:1].[timeout:1]
+[===]???: [timeout:1].[timeout:1].[timeout:1].[timeout:1]
 [===][choice:"Hey! Talk to me! Who was that person? Did you throw him down there?","Please, talk to me. I am confused."][waitForAnswer][jumpTo:1.2.2.#]
 
 [===|===][1.2.2.1]
 [===|===]Self: Hey! Talk to me! Who was that person? Did you throw him down there?[waitForEnter]
-[===|===]§: He was anybody, [timeout:1]...really.[waitForEnter]
+[===|===]???: He was anybody, [timeout:1]...really.[waitForEnter]
 
 [===|===][choice:"You are horrible! Why did you do that?","Anybody?"][waitForAnswer][jumpTo:1.2.2.1.#]
 [===|===][===|===][1.2.2.1.1]
 [===|===][===|===]Self: You are horrible! Why did you do that?
-[===|===][===|===]§: Because...[timeout:1] I am anybody, so...[timeout:1] I guess you are right. I must be horrible! 
+[===|===][===|===]???: Because...[timeout:1] I am anybody, so...[timeout:1] I guess you are right. I must be horrible!
 [===|===][===|===]   At least... If there is somebody horrible... But there has to be! I mean. The Word exists![waitForAnswer][jumpTo:1.2.3]
 [===|===][===|===][1.2.2.1.2]
 [===|===][===|===]Self: Anybody? What?[waitForEnter]
-[===|===][===|===]§: Or was he nobody? No. That makes no sense. Nobody doesn't do anything except Anybody, which does anything.[waitForEnter]
+[===|===][===|===]???: Or was he nobody? No. That makes no sense. Nobody doesn't do anything except Anybody, which does anything.[waitForEnter]
 [===|===][===|===]Self: Stop talking nonsense and answer me![waitForEnter]
-[===|===][===|===]§: Well, I guess...[timeout:1] Somebody just invited anybody to become nobody again.[waitForEnter][jumpTo:1.2.3]
+[===|===][===|===]???: Well, I guess...[timeout:1] Somebody just invited anybody to become nobody again.[waitForEnter][jumpTo:1.2.3]
 
 [===|===][1.2.2.2]
 [===|===]Self: Please talk to me! I am confused.[waitForEnter]
-[===|===]§ What do you not understand? Isn't it obvious?[waitForEnter]
+[===|===]??? What do you not understand? Isn't it obvious?[waitForEnter]
 [===|===]Self: No![waitForEnter][jumpTo:1.2.2.2.0]
 
-[===][1.2.3][unfreeze]
+[===][1.2.3]
 [===]Self: What stupid kind of answer is that?[waitForEnter]
-[===]§: Well I still haven't figured out myself.
+[===]???: Well I still haven't figured out myself.
 [===]   So... how would you ever know? [timeout:1].[timeout:1].[timeout:1].[waitForEnter]
 [===]Self: WHAT?!?[waitForEnter]
+[disableDisplay]
+[unfreeze]
 [exitDialog]
 
 [1.3]
 Self: ...[waitForEnter]
-§: How do you feel now?[waitForEnter]
+???: How do you feel now?[waitForEnter]
 Self: Uhm... Why do you want to know that?[waitForEnter]
-§: ...[waitForEnter]
-Self: Hey! You alread know who I am! Let me ask you a question first![waitForEnter][jumpTo:1.1.2] 
+???: ...[waitForEnter]
+Self: Hey! You alread know who I am! Let me ask you a question first![waitForEnter][jumpTo:1.1.2]

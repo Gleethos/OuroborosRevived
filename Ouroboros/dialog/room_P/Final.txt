@@ -1,8 +1,8 @@
 [timeout:2]
 [enableDisplay]
-§: Please! [waitForEnter] 
-Self: Do you want this? [waitForEnter] 
-§: Yes, please ...[waitForEnter] 
+§: Please! [waitForEnter]
+Self: Do you want this? [waitForEnter]
+§: Yes, please ...[waitForEnter]
 [disableDisplay]
 [timeout:2]
 [enableDisplay]
@@ -14,5 +14,5 @@ Self: NO! [waitForEnter]
 §: Show me. Try me. [waitForEnter]
 Self: Ok! Fuck OFF then.[waitForEnter]
 [returnMessage:falling][disableDisplay]
-AAAAaaaaaaaaaaahhhhhhhhhh. 
+AAAAaaaaaaaaaaahhhhhhhhhh.
 [timeout:6]

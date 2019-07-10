@@ -1,0 +1,5 @@
+Bug Name: Timeout over 25sec
+Wiederholbar: ya
+Raum: A
+Beschreibung:
+Der erste Timeout braucht über 25sec, obwohl als Wert nur 4 übergeben werden sollte.

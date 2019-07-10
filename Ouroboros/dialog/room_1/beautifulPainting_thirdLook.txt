@@ -1,7 +1,13 @@
+[freeze]
 [enableDisplay]
 Self: 'It seems to be an oil painting.'[waitForEnter]
+
 [choice:"*touch it*","..."][waitForAnswer][jumpTo:1.#]
 [1.1][returnMessage:beautifulTouched]
-Self: 'Ew! It's still wet.'[waitForEnter][exitDialog]
+Self: 'Ew! It's still wet.'[waitForEnter][jumpTo:2]
 [1.2]
-Self: ...[waitForEnter]
+Self: ...[waitForEnter][jumpTo:2]
+
+[2]
+[disableDisplay]
+[unfreeze]

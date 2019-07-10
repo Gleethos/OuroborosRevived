@@ -3,8 +3,10 @@ Wiederholbar: ya
 Raum: alle
 Beschreibung:
 Das Inventar ist nicht gut formatiert.
+
 Wenn es Leer ist, kommt folgendes:
 Memory
 | 
+
 Sollte:
 Memory

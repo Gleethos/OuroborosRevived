@@ -8,21 +8,23 @@ public class event_script_R2 : Eventscript {
 	private new readonly float centerX = -11.03f;
 	private new readonly float centerY = -4.78f;
 
-	int eventCounter=0;
+	private int eventCounter=0;
 
-	door_script exitDoor;
-	door_script entryDoor;
+	private door_script exitDoor;
+	private door_script entryDoor;
 
-	player_script player;
-	event_script_R3 nextEventScript;
-	dialog_script dialogManager;
-	bildchange_script beautifulPainting;
-	bild_script scaryPainting;
+	private player_script player;
+	private event_script_R3 nextEventScript;
+	private dialog_script dialogManager;
+	private bildchange_script beautifulPainting;
+	private bild_script scaryPainting;
 	private SpriteRenderer r2Dark;
 	private SpriteRenderer r1Dark;
 
+    [SerializeField]
+    ColliderListener event1;
+
 	void Start () {
-		//Debug.Log("Event script for room 2 initialized!");
 		exitDoor = GameObject.FindWithTag ("Exit_R2").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R2").GetComponent<door_script>();
 
@@ -32,7 +34,7 @@ public class event_script_R2 : Eventscript {
 
 	}
 
-	// Update is called once per frame
+	
 	void Update () {
 
 		if(isActive)
@@ -42,36 +44,36 @@ public class event_script_R2 : Eventscript {
 
 			switch (eventCounter) {
 			case 0:
-				dialogManager.setDialog ("conversationWithFire.txt");
-				eventCounter++;
-				break;
+                    if (event1.getColliderStateEnter () || event1.getColliderStateExit ()) {
+                        dialogManager.setDialog ("conversationWithFire.txt");
+                        eventCounter++;
+                    }
+				    break;
 
 			case 1:
-				//Debug.Log ("Dialog still running: "+dialogManager.isActive());
-				if(!dialogManager.isActive()){
-					eventCounter++;
-				}
+				    if(!dialogManager.isActive()){
+					    eventCounter++;
+				    }
 
-				break;
+				    break;
 
 
 			case 2:
-				Debug.Log ("I'm here :>");
-				/*dialogManager.setDialog ("areYouAngry.txt");
-				if(dialogManager.getDialogOutput()=="selfIsCalm"){
-					eventCounter++;
-					player.unfreeze ();
-				}*/
-				eventCounter++;
-				break;
+				    dialogManager.setDialog ("areYouAngry.txt");
+				    if(dialogManager.getDialogOutput()=="selfIsCalm"){
+					    eventCounter++;
+					    player.unfreeze ();
+				    }
+				    eventCounter++;
+				    break;
 
 			case 3:
-				exitDoor.setIsLocked ();
-				roomSolved = true;
-				eventCounter++;
-				break;
-			case 4:
-				break;
+				    exitDoor.setIsLocked ();
+				    roomSolved = true;
+				    eventCounter++;
+				    break;
+            case 4:
+                    break;
 
 
 			}
@@ -82,7 +84,6 @@ public class event_script_R2 : Eventscript {
 			{
 				if(exitDoor.isLocked())
 				{	
-					//File.Delete("dialog/room_2/ItemHolder.txt");
 					r2Dark = GameObject.Find ("raum2D").GetComponent<SpriteRenderer>();
 					r2Dark.enabled = true;
 					r1Dark = GameObject.Find ("raum3D").GetComponent<SpriteRenderer>();

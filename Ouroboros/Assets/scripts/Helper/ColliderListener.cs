@@ -2,15 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * You can put it on a collider
+ * and than you can check the state of the collider
+ * with getColliderStateEnter or getColliderStateExit
+ */
+ 
 public class ColliderListener : MonoBehaviour {
 	private bool checkEY = false;
 	private bool checkEX = false;
 
-	void OnTriggerEnter2D(Collider2D coll) {
-		checkEY = true;
+	void OnTriggerEnter2D(Collider2D coll) { 
+        if(coll.CompareTag("Player"))
+		    checkEY = true;
 	}
 	void OnTriggerExit2D(Collider2D coll) {
-		checkEX = true;
+        if (coll.CompareTag ("Player"))
+            checkEX = true;
 	}
 
 	public bool getColliderStateEnter(){
