@@ -71,7 +71,7 @@ public class ScriptReader : MonoBehaviour {
             isDropping = false;
             dialogtxt = "";
             command = "";
-            room = "";
+            //room = "";
             rawDialog = "";
             currentLine = "";
             dialogIndex = 0;
@@ -87,6 +87,10 @@ public class ScriptReader : MonoBehaviour {
             dialogOutputString = "";
             end = false;
             stopped = false;
+            player.Unfreeze ();
+            player.MoveRelative (0, 0);
+            display.enabled = false;
+            dialogAusgabe.text = "";
             return;
         }
 		//Checking if there is no dialog set... if there is:

@@ -140,9 +140,9 @@ public class PlayerController : MonoBehaviour {
 
         if (!isFreeze && isResponsiv) {
             
-            if (Input.GetKeyDown (KeyCode.I) && !invActive) { 
+            if (Input.GetKeyDown (KeyCode.M) && !invActive) { 
                 StartCoroutine (DisplayItemHolder ());
-            }else if (Input.GetKeyDown (KeyCode.I) && invActive) {
+            }else if (Input.GetKeyDown (KeyCode.M) && invActive) {
 
                 dialog.dialogAusgabe.text = "";
                 dialog.display.enabled = false;
