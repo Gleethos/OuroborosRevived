@@ -32,7 +32,7 @@ public class player_script : MonoBehaviour {
 	[SerializeField]
 	private bool controlDelete = false;
 	private StreamReader reader;
-	private dialog_script dialog;
+	private ScriptReader dialog;
 	public Text dialogAusgabe;
 	public Image display; 
 	[SerializeField]
@@ -46,7 +46,7 @@ public class player_script : MonoBehaviour {
 	void Start () {
 		walking = GetComponentInChildren(typeof(Animator)) as Animator;
 		idle = GetComponentInChildren (typeof(SpriteRenderer)) as SpriteRenderer;
-		dialog = GameObject.FindObjectOfType(typeof(dialog_script)) as dialog_script;
+		dialog = GameObject.FindObjectOfType(typeof(ScriptReader)) as ScriptReader;
 
 	}
 	

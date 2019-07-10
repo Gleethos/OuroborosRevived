@@ -25,7 +25,7 @@ public class event_script_P : Eventscript {
 	private GameObject npcCameraObject;
 	public Camera playerCamera;
 	public Camera npcCamera;
-	dialog_script dialogManager;
+	ScriptReader dialogManager;
 	bool npcMove = false;
 	private SpriteRenderer npcSprite;
 	private Animator npcAnimation;
@@ -47,7 +47,7 @@ public class event_script_P : Eventscript {
 		NPC2 = GameObject.FindWithTag ("NPC2").GetComponentInChildren(typeof(SpriteRenderer)) as SpriteRenderer;
 		walking = npc_object.GetComponentInChildren(typeof(Animator)) as Animator;
 		idle = npc_object.GetComponentInChildren (typeof(SpriteRenderer)) as SpriteRenderer;
-		dialogManager = GameObject.FindObjectOfType (typeof(dialog_script)) as dialog_script;
+		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 		event1 = GameObject.FindWithTag ("Entry_P").GetComponent<ColliderListener> ();
 		playerCameraObject = GameObject.FindWithTag ("MainCamera");
 		npcCameraObject = GameObject.FindWithTag ("Camera3");

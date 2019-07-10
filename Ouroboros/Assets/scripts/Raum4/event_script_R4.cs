@@ -19,9 +19,9 @@ public class event_script_R4 : Eventscript {
 	door_script exitDoor;
 	door_script entryDoor;
 
-	player_script player;
+	PlayerController player;
 	event_script_R5 nextEventScript;
-	dialog_script dialogManager;
+	ScriptReader dialogManager;
 	bildchange_script beautifulPainting;
 	bild_script scaryPainting;
 	private SpriteRenderer r4Dark;
@@ -39,14 +39,14 @@ public class event_script_R4 : Eventscript {
 		exitDoor = GameObject.FindWithTag ("Exit_R4").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R4").GetComponent<door_script>();
 
-		player = GameObject.FindObjectOfType (typeof(player_script)) as player_script;
+		player = GameObject.FindObjectOfType (typeof(PlayerController)) as PlayerController;
 		nextEventScript = GameObject.FindObjectOfType (typeof(event_script_R5)) as event_script_R5;
-		dialogManager = GameObject.FindObjectOfType (typeof(dialog_script)) as dialog_script;
+		dialogManager = GameObject.FindObjectOfType (typeof(ScriptReader)) as ScriptReader;
 
 		mud = GameObject.FindObjectOfType (typeof(mud_script)) as mud_script;
 		mudSwitch = GameObject.FindObjectOfType (typeof(switch_script)) as switch_script;
 		colliderE = GameObject.Find ("Collider [R4] Lightning").GetComponent<PolygonCollider2D> ();
-		defaultPlayerSpeed = player.getSpeed();
+		defaultPlayerSpeed = player.Movementspeed;
 		mud.drain();
 
 		audio = GameObject.Find ("EventManager_R4");
@@ -64,7 +64,7 @@ public class event_script_R4 : Eventscript {
 			}
 
 		if(mud.isFilling()){
-			player.setSpeed (drainedPlayerSpeed(player.getX(), player.getY(), defaultPlayerSpeed));
+			player.Movementspeed = (drainedPlayerSpeed(player.GetX, player.GetY, defaultPlayerSpeed));
 
 				audio.GetComponent<AudioSource> ().Play ();
 
@@ -73,7 +73,7 @@ public class event_script_R4 : Eventscript {
 		if(isActive)
 		{
 			dialogManager.setRoom ("room_4");
-			player.setRoom ("room_4");
+			player.SetRoom ("room_4");
 
 			switch (eventCounter) {
 
@@ -146,7 +146,7 @@ public class event_script_R4 : Eventscript {
 				if(exitDoor.isLocked())
 				{
 					//GetComponent<AudioSource> ().enabled = false;
-					player.setSpeed (defaultPlayerSpeed);
+					player.Movementspeed = (defaultPlayerSpeed);
 					File.Delete("dialog/room_4/ItemHolder.txt");
 					r4Dark = GameObject.Find ("raum4D").GetComponent<SpriteRenderer>();
 					r4Dark.enabled = true;

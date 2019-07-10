@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class height_field : MonoBehaviour {
-	private player_script spieler; 
+	private PlayerController spieler; 
 	private float distance;
 	private BoxCollider2D box;
 	private float colliderSize;
@@ -20,7 +20,7 @@ public class height_field : MonoBehaviour {
 	private string parentName = "";
 
 	void Start () {
-		spieler = GameObject.FindObjectOfType(typeof(player_script)) as player_script;
+		spieler = GameObject.FindObjectOfType(typeof(PlayerController)) as PlayerController;
 		box = GetComponentInChildren(typeof(BoxCollider2D)) as BoxCollider2D;
 		boxListener = GetComponentInChildren<ColliderListener> ();
 		realPlayer = GameObject.FindGameObjectWithTag ("Player");
@@ -79,7 +79,7 @@ public class height_field : MonoBehaviour {
 			case "P_Treppe":
 				break;
 			default:
-				spieler.setSpeed (2f);
+                    spieler.Movementspeed = (2f);
 				realPlayer.transform.localScale = new Vector3 (.05f,.05f,1f);
 				break;
 
@@ -108,7 +108,7 @@ public class height_field : MonoBehaviour {
 		case "R1_Treppe":
 			if (colliderActiv == true) {
 				if (distance > 0) {
-					spieler.setSpeed (2f - (distance*0.40f));
+                        spieler.Movementspeed = (2f - (distance*0.40f));
 					realPlayer.transform.localScale = new Vector3 (.05f - 0.01f * distance, .05f - 0.01f * distance, 1f);
 				} 
 			}
@@ -123,12 +123,12 @@ public class height_field : MonoBehaviour {
 			if (colliderActiv == true) {
 				if (distance > 0 && distance <= box.size.y/2) {
 					//spielergröße bis zur mitte ansteigen lassen je nach abstand
-					spieler.setSpeed (1f + distance / 2);
+					spieler.Movementspeed = 1f + distance / 2;
 					realPlayer.transform.localScale = new Vector3 (.05f + 0.01f * distance, .05f + 0.01f * distance, 1f);
 				} else if (distance > 0) {
 					//differenz zur mitte (höchster punkt) lässt spieler bis zum verlassen der brücke wieder kleiner werden
 					tempDistance = (box.size.y/2 - (distance - box.size.y/2));
-					spieler.setSpeed (1f + tempDistance / 2);
+                        spieler.Movementspeed = (1f + tempDistance / 2);
 
 					realPlayer.transform.localScale = new Vector3 (.05f + 0.01f * tempDistance, .05f + 0.01f * tempDistance, 1f);
 
@@ -139,7 +139,7 @@ public class height_field : MonoBehaviour {
 		case "R3_untere_Treppe":
 			if (colliderActiv == true) {
 				if (distance > 0) {
-					spieler.setSpeed (1.67f - (distance*0.20f));
+                        spieler.Movementspeed = (1.67f - (distance*0.20f));
 					realPlayer.transform.localScale = new Vector3 (.04f - 0.0045f * distance, .04f - 0.0045f * distance, 1f);
 				} 
 			}
@@ -148,7 +148,7 @@ public class height_field : MonoBehaviour {
 		case "R3_obere_Treppe":
 			if (colliderActiv == true) {
 				if (distance > 0) {
-					spieler.setSpeed (2f - (distance*0.14f));
+                        spieler.Movementspeed = (2f - (distance*0.14f));
 					realPlayer.transform.localScale = new Vector3 (.05f - 0.004251f * distance, .05f - 0.004251f * distance, 1f);
 				} 
 			}
@@ -158,13 +158,13 @@ public class height_field : MonoBehaviour {
 
 			if (colliderActiv == true) {
 				if (distance > 0 && distance <= box.size.y/2) {
-					//spielergröße bis zur mitte ansteigen lassen je nach abstand
-					spieler.setSpeed (1.5f + distance / 4);
+                        //spielergröße bis zur mitte ansteigen lassen je nach abstand
+                        spieler.Movementspeed = (1.5f + distance / 4);
 					realPlayer.transform.localScale = new Vector3 (.05f + 0.0033f * distance, .05f + 0.0033f * distance, 1f);
 				} else if (distance > 0) {
 					//differenz zur mitte (höchster punkt) lässt spieler bis zum verlassen der brücke wieder kleiner werden
 					tempDistance = (box.size.y/2 - (distance - box.size.y/2));
-					spieler.setSpeed (1.5f + tempDistance / 4);
+                        spieler.Movementspeed = (1.5f + tempDistance / 4);
 
 					realPlayer.transform.localScale = new Vector3 (.05f + 0.0033f * tempDistance, .05f + 0.0033f * tempDistance, 1f);
 
@@ -175,7 +175,7 @@ public class height_field : MonoBehaviour {
 		case "R4_Treppe":
 			if (colliderActiv == true) {
 				if (distance > 0) {
-					spieler.setSpeed (2f + (distance*0.33f));
+                        spieler.Movementspeed = (2f + (distance*0.33f));
 					realPlayer.transform.localScale = new Vector3 (.05f + 0.01f * distance, .05f + 0.01f * distance, 1f);
 				} 
 			}
@@ -184,7 +184,7 @@ public class height_field : MonoBehaviour {
 		case "R5_Totenkopf_Gang":
 			if (colliderActiv == true) {
 				if (distance > 0) {
-					spieler.setSpeed (2f - distance*.33f);
+                        spieler.Movementspeed = (2f - distance*.33f);
 					realPlayer.transform.localScale = new Vector3 (.05f - 0.00825f * distance, .05f - 0.00825f * distance, 1f);
 				} 
 			}
@@ -193,7 +193,7 @@ public class height_field : MonoBehaviour {
 		case "P_Totenkopf_Gang":
 			if (colliderActiv == true) {
 				if (distance > 0) {
-					spieler.setSpeed (.8f + distance*.8975f);
+                        spieler.Movementspeed = (.8f + distance*.8975f);
 					realPlayer.transform.localScale = new Vector3 (.02f + 0.02244f * distance, .02f + 0.02244f * distance, 1f);
 				} 
 			}
@@ -202,7 +202,7 @@ public class height_field : MonoBehaviour {
 		case "P_Treppe":
 			if (colliderActiv == true) {
 				if (distance > 0) {
-					spieler.setSpeed (3f - distance*.8857f);
+                        spieler.Movementspeed = (3f - distance*.8857f);
 					realPlayer.transform.localScale = new Vector3 (.075f - 0.02214f * distance, .075f - 0.02214f * distance, 1f);
 				} 
 			}

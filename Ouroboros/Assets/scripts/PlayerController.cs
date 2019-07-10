@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
     private SpriteRenderer idleRender;
 
     //... Dialogue Control
-    private dialog_script dialog;
+    private ScriptReader dialog;
     private string roomDir = "room_A";
 
     //... Movement
@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour {
     private float movingY;
     private bool lockX = false;
     private bool lockY = false;
+    private float time = 0f;
+    private bool checkF = false;
 
     //... Inventory
     private string [] itemHolder = new string [30];
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         walking = GetComponentInChildren (typeof (Animator)) as Animator;
         idleRender = GetComponentInChildren (typeof (SpriteRenderer)) as SpriteRenderer;
-        dialog = GameObject.FindObjectOfType (typeof (dialog_script)) as dialog_script;
+        dialog = GameObject.FindObjectOfType (typeof (ScriptReader)) as ScriptReader;
 
         walking.enabled = false;
 
@@ -148,6 +150,11 @@ public class PlayerController : MonoBehaviour {
 
             }
 
+        }
+
+        if (checkF == true)
+        {
+            StartCoroutine(FreezeFor(time));
         }
 
     }
@@ -265,6 +272,20 @@ public class PlayerController : MonoBehaviour {
         GetComponent<AudioSource> ().Stop ();
         walking.enabled = false;
         idleRender.sprite = idle;
+    }
+
+    IEnumerator FreezeFor(float time)
+    {
+        Freeze();
+        yield return new WaitForSeconds(time);
+        Unfreeze();
+        checkF = false;
+    }
+
+    public void SetFreezeFor(float time)
+    {
+        this.time = time;
+        checkF = true;
     }
 
     public void Unfreeze() {
