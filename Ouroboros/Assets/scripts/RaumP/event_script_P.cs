@@ -32,8 +32,7 @@ public class event_script_P : Eventscript {
 	private SpriteRenderer aDark;
 
 
-
-<<<<<<< HEAD
+    
 	// Use this for initialization
 	void Start () {
 
