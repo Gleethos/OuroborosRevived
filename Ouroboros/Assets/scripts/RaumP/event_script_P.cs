@@ -161,8 +161,7 @@ public class event_script_P : Eventscript {
 
 
             if (roomSolved) {
-
-                File.Delete ("dialog/room_P/ItemHolder.txt");
+                
                 endAndProceed ();
 
             }
