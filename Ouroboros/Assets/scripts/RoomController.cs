@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
+    private ScriptReader dialog;
+
     private GameObject player;
+
     private Eventscript currentRoom = null;
     private Eventscript nextRoom = null;
 
@@ -27,6 +30,8 @@ public class RoomController : MonoBehaviour
     }
 
     private void Start() {
+        dialog = GameObject.FindObjectOfType (typeof (ScriptReader)) as ScriptReader;
+
         player = GameObject.FindWithTag ("Player");
 
         darkRoomA = GameObject.Find ("anfangsraumD").GetComponent<SpriteRenderer> ();
@@ -57,6 +62,7 @@ public class RoomController : MonoBehaviour
 
     private void Update() {
         if (Input.GetKeyDown (KeyCode.R)) {
+            dialog.DropScript ();
             currentRoom.ResetEventCounter ();
             currentRoom.Unsolve ();
             currentRoom.Deactivate ();
@@ -66,6 +72,7 @@ public class RoomController : MonoBehaviour
 
         
         if (!string.IsNullOrEmpty(room) && (currentRoom == null || !currentRoom.name.Contains (room))) {
+            Debug.Log ("Setting Room Properties");
 
             darkRoomA.enabled = false;
             darkRoom1.enabled = false;
@@ -76,12 +83,14 @@ public class RoomController : MonoBehaviour
 
             if (currentRoom != null)
                 ResetRoom ();
-            else
+            else {
                 for (int i = 0; i < eventscripts.Length; i++) {
                     eventscripts [i].ResetEventCounter ();
                     eventscripts [i].Unsolve ();
                     eventscripts [i].Deactivate ();
                 }
+                dialog.DropScript ();
+            }
                     
 
             switch (room) {
