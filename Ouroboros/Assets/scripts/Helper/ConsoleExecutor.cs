@@ -1,26 +1,46 @@
-﻿/// 
-/// Handles parsing and execution of console commands, as well as collecting log output.
-/// 
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Collections;
-//using Boo.Lang;
-
-//Function interface for command execution logic implementation!
-public delegate void CommandHandler(string[] args);
-
-public class ConsoleController
+public class ConsoleExecutor : MonoBehaviour
 {
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("Goooooooooooooood!");
+        gamestate = GameObject.FindObjectOfType(typeof(GameStateController)) as GameStateController;
+
+        //When adding commands, you must add a call below to registerCommand() with its name, implementation method, and help text.
+        RegisterCommand("gamestate", GameState, "access game objects and execute functions");
+        RegisterCommand("babble", Babble, "Example command that demonstrates how to parse arguments. babble [word] [# of times to repeat]");
+        RegisterCommand("echo", Echo, "echoes arguments back as array (for testing argument parser)");
+        RegisterCommand("help", Help, "Print this help.");
+        RegisterCommand("hide", Hide, "Hide the console.");
+        RegisterCommand(repeatCmdName, RepeatCommand, "Repeat last command.");
+        RegisterCommand("reload", Reload, "Reload game.");
+        RegisterCommand("resetprefs", ResetPrefs, "Reset & saves PlayerPrefs.");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+
+
+
+
+    //Function interface for command execution logic implementation!
+    public delegate void CommandHandler(string[] args);
+
     #region Event declarations
     // Used to communicate with ConsoleView
     public delegate void LogChangedHandler(string[] log);
-        public event LogChangedHandler logChanged;
+    public event LogChangedHandler logChanged;
 
-        public delegate void VisibilityChangedHandler(bool visible);
-        public event VisibilityChangedHandler visibilityChanged;
+    public delegate void VisibilityChangedHandler(bool visible);
+    public event VisibilityChangedHandler visibilityChanged;
     #endregion
 
     /// 
@@ -62,9 +82,10 @@ public class ConsoleController
     void Babble(string[] args)
     {
         int cmdIdx = 4;
-        while (cmdIdx!=0) {
+        while (cmdIdx != 0)
+        {
             string cmd = commandHistory[cmdIdx];
-            if (String.Equals(repeatCmdName, cmd))
+            if (string.Equals(repeatCmdName, cmd))
             {
                 continue;
             }
@@ -115,30 +136,16 @@ public class ConsoleController
         {
             gamestate.executeStateCommand(args[0]);
         }
-        else {
+        else
+        {
             AppendLogLine(gamestate.AvailableObjects());
         }
-        
+
     }
     //---------------------------------------------------------
     #endregion
     //---------------------------------------------------------
-
-    // CONSTRUCTOR:
-    public ConsoleController()
-    {
-        gamestate = GameObject.FindObjectOfType(typeof(GameStateController)) as GameStateController;
-        
-        //When adding commands, you must add a call below to registerCommand() with its name, implementation method, and help text.
-        RegisterCommand("gamestate", GameState, "access game objects and execute functions");
-        RegisterCommand("babble", Babble, "Example command that demonstrates how to parse arguments. babble [word] [# of times to repeat]");
-        RegisterCommand("echo", Echo, "echoes arguments back as array (for testing argument parser)");
-        RegisterCommand("help", Help, "Print this help.");
-        RegisterCommand("hide", Hide, "Hide the console.");
-        RegisterCommand(repeatCmdName, RepeatCommand, "Repeat last command.");
-        RegisterCommand("reload", Reload, "Reload game.");
-        RegisterCommand("resetprefs", ResetPrefs, "Reset & saves PlayerPrefs.");
-    }
+    
     void RegisterCommand(string command, CommandHandler handler, string help)
     {
         commands.Add(command, new CommandRegistration(command, handler, help));
@@ -165,7 +172,7 @@ public class ConsoleController
 
     public void RunCommandString(string commandString)
     {
-        Debug.Log("Running command: "+commandString);
+        Debug.Log("Running command: " + commandString);
         AppendLogLine("$ " + commandString);
 
         string[] parsedCommand = ParseArguments(commandString);
@@ -173,18 +180,18 @@ public class ConsoleController
         if (parsedCommand.Length == commandString.Length)
         {
             return;
-        }  
+        }
         else if (parsedCommand.Length >= 2)
         {
-			int argsCount = parsedCommand.Length - 1;
+            int argsCount = parsedCommand.Length - 1;
             args = new string[argsCount];
-			Array.Copy(parsedCommand, 1, args, 0, argsCount);
-		}
+            System.Array.Copy(parsedCommand, 1, args, 0, argsCount);
+        }
         RunCommand(parsedCommand[0].ToLower(), args);
         commandHistory.Add(commandString);
-	}
+    }
 
-	public void RunCommand(string command, string[] args)
+    public void RunCommand(string command, string[] args)
     {
         CommandRegistration reg = null;
         if (!commands.TryGetValue(command, out reg))
@@ -194,40 +201,42 @@ public class ConsoleController
         else
         {
             if (reg.handler == null)
-             {
-                 AppendLogLine(string.Format("Unable to process command '{0}', handler was null.", command));
-             }
-             else
+            {
+                AppendLogLine(string.Format("Unable to process command '{0}', handler was null.", command));
+            }
+            else
             {
                 reg.handler(args);
             }
         }
     }
 
-//Argument parsing! String --TO--> String[]
-static string[] ParseArguments(string commandString)
-{
-    LinkedList<char> parmChars = new LinkedList<char>(commandString.ToCharArray());
-    bool inQuote = false;
-    var node = parmChars.First;
-    while (node != null)
+    //Argument parsing! String --TO--> String[]
+    static string[] ParseArguments(string commandString)
     {
-        var next = node.Next;
-        if (node.Value == '"')
+        LinkedList<char> parmChars = new LinkedList<char>(commandString.ToCharArray());
+        bool inQuote = false;
+        var node = parmChars.First;
+        while (node != null)
         {
-            inQuote = !inQuote;
-            parmChars.Remove(node);
+            var next = node.Next;
+            if (node.Value == '"')
+            {
+                inQuote = !inQuote;
+                parmChars.Remove(node);
+            }
+            if (!inQuote && node.Value == ' ')
+            {
+                node.Value = '\n';
+            }
+            node = next;
         }
-        if (!inQuote && node.Value == ' ')
-        {
-            node.Value = '\n';
-        }
-        node = next;
+        char[] parmCharsArr = new char[parmChars.Count];
+        parmChars.CopyTo(parmCharsArr, 0);
+        return (new string(parmCharsArr)).Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
     }
-    char[] parmCharsArr = new char[parmChars.Count];
-    parmChars.CopyTo(parmCharsArr, 0);
-    return (new string(parmCharsArr)).Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-}
+
+
 
 
 }

@@ -6,8 +6,7 @@ using System.IO;
 public class event_script_A : Eventscript {
 
 
-	private new readonly float centerX = -0.29f;
-	private new readonly float centerY = -11.79f;
+	//private new readonly float 
 	private float speed;
 	
 
@@ -38,6 +37,8 @@ public class event_script_A : Eventscript {
 	
 	void Start () {
         Setup();
+        centerX = -0.29f;
+        centerY = -11.79f;
         isActive = true;
         exitDoor = GameObject.FindWithTag ("Exit_A").GetComponent<door_script>();
         
