@@ -4,6 +4,21 @@ using UnityEngine;
 
 public class ConsoleExecutor : MonoBehaviour
 {
+    //========================================================================================================
+    /// How many log lines should be retained?
+    /// Note that strings submitted to appendLogLine with embedded newlines will be counted as a single line.
+    const int scrollbackSize = 20;
+
+    // Scroll Queue, Command History & Command Distionary:
+    Queue<string> scrollback = new Queue<string>(scrollbackSize);
+    System.Collections.Generic.List<string> commandHistory = new System.Collections.Generic.List<string>();
+    Dictionary<string, CommandRegistration> commands = new Dictionary<string, CommandRegistration>();
+    GameStateController gamestate;
+
+    public string[] log { get; private set; } //Copy of scrollback as an array for easier use by ConsoleView
+    const string repeatCmdName = "!!"; //Name of the repeat command, constant since it needs to skip these if they are in the command history
+
+    //========================================================================================================
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +39,12 @@ public class ConsoleExecutor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gamestate == null)
+        {
+            gamestate = GameObject.FindObjectOfType(typeof(GameStateController)) as GameStateController;
+        }
     }
-
-
-
-
-
+    
     //Function interface for command execution logic implementation!
     public delegate void CommandHandler(string[] args);
 
@@ -38,7 +52,6 @@ public class ConsoleExecutor : MonoBehaviour
     // Used to communicate with ConsoleView
     public delegate void LogChangedHandler(string[] log);
     public event LogChangedHandler logChanged;
-
     public delegate void VisibilityChangedHandler(bool visible);
     public event VisibilityChangedHandler visibilityChanged;
     #endregion
@@ -52,28 +65,13 @@ public class ConsoleExecutor : MonoBehaviour
         public CommandHandler handler { get; private set; }
         public string help { get; private set; }
 
-        public CommandRegistration(string command, CommandHandler handler, string help)
-        {
+        public CommandRegistration(string command, CommandHandler handler, string help){
             this.command = command;
             this.handler = handler;
             this.help = help;
         }
     }
-    //========================================================================================================
-    /// How many log lines should be retained?
-    /// Note that strings submitted to appendLogLine with embedded newlines will be counted as a single line.
-    const int scrollbackSize = 20;
-
-    // Scroll Queue, Command History & Command Distionary:
-    Queue<string> scrollback = new Queue<string>(scrollbackSize);
-    System.Collections.Generic.List<string> commandHistory = new System.Collections.Generic.List<string>();
-    Dictionary<string, CommandRegistration> commands = new Dictionary<string, CommandRegistration>();
-    GameStateController gamestate;
-
-    public string[] log { get; private set; } //Copy of scrollback as an array for easier use by ConsoleView
-
-    const string repeatCmdName = "!!"; //Name of the repeat command, constant since it needs to skip these if they are in the command history
-
+    
     //========================================================================================================
     #region Command handlers//Implement new commands in this region of the file.
     /// A test command to demonstrate argument checking/parsing.

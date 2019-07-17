@@ -5,8 +5,7 @@ using System.IO;
 
 public class event_script_A : Eventscript {
 
-
-	//private new readonly float 
+   
 	private float speed;
 	
 

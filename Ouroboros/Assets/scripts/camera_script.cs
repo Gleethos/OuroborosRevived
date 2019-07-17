@@ -46,7 +46,6 @@ public class camera_script : MonoBehaviour {
 			b = roomA.GetCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2.5f, 0.5f);
-            Debug.Log(a+" ... "+b+" ... d="+distance+" ... x:"+player.GetX+", y:"+player.GetY);
 		}
 		else if 
 		(room1.RoomIsActive())
