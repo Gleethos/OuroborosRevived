@@ -6,11 +6,6 @@ using System.IO;
 
 public class event_script_R1 : Eventscript {
 
-	private new readonly float centerX = -11.03f;
-	private new readonly float centerY = -4.78f;
-
-	
-
 	private door_script exitDoor;
 	private door_script entryDoor;
     
@@ -29,6 +24,8 @@ public class event_script_R1 : Eventscript {
 	
 	void Start () {
         Setup ();
+        centerX = -11.03f;
+        centerY = -4.78f;
         exitDoor = GameObject.FindWithTag ("Exit_R1").GetComponent<door_script>();
 		entryDoor = GameObject.FindWithTag ("Entry_R1").GetComponent<door_script>();
    

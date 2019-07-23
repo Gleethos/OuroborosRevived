@@ -28,7 +28,7 @@ public class camera_script : MonoBehaviour {
 		playerCameraObject = GameObject.FindWithTag ("MainCamera");
 		playerCamera = playerCameraObject.GetComponent<Camera> ();
 
-		
+        
 	}
 	
 	void Update () {
@@ -40,57 +40,62 @@ public class camera_script : MonoBehaviour {
 		float sizeModifier=0;
 
 		if
-			(roomA.RoomIsActive())
-		{a = roomA.GetCenterX()-player.GetX;
+		(roomA.RoomIsActive())
+		{
+            a = roomA.GetCenterX()-player.GetX;
 			b = roomA.GetCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
-			sizeModifier = getGaussianOf (distance, 2f, 1f);
+			sizeModifier = getGaussianOf (distance, 2.5f, 0.5f);
 		}
 		else if 
-			(room1.RoomIsActive())
-		{a = room1.GetCenterX()-player.GetX;
+		(room1.RoomIsActive())
+		{
+            a = room1.GetCenterX()-player.GetX;
 			b = room1.GetCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 1f, 1f);
 		}
 		else if 
-			(room2.RoomIsActive())
-		{a = room2.GetCenterX()-player.GetX;
+		(room2.RoomIsActive())
+		{
+            a = room2.GetCenterX()-player.GetX;
 			b = room2.GetCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 1f, 1f);
 		}
 		else if 
-			(room3.RoomIsActive())
-		{a = room3.GetCenterX()-player.GetX;
+		(room3.RoomIsActive())
+		{
+            a = room3.GetCenterX()-player.GetX;
 			b = room3.GetCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2f, 0.7f);
 		}
 		else if 
-			(room4.RoomIsActive())
-		{a = room4.GetCenterX()-player.GetX;
+		(room4.RoomIsActive())
+		{
+            a = room4.GetCenterX()-player.GetX;
 			b = room4.GetCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2f, 0.6f);
 		}
-		else if 
-			(room5.RoomIsActive())
-		{a = room5.GetCenterX()-player.GetX;
+		else if (room5.RoomIsActive())
+		{
+            a = room5.GetCenterX()-player.GetX;
 			b = room5.GetCenterY()-player.GetY;
 			distance = Mathf.Pow ((float)(Mathf.Pow ((float)a, 2.0f) + Mathf.Pow ((float)b, 2.0f)), 0.5f);
 			sizeModifier = getGaussianOf (distance, 2f, 1.1f);
 		}
-
 		//Setting new camera size according to current sizeModifier:
-			if (playerCamera.enabled) {
+		if (playerCamera.enabled)
+        {
 			Camera.main.orthographicSize = 2f + sizeModifier;
 		}
 
 
-		/*Vector3 temp = gameObject.transform.eulerAngles;
-		temp.z = 1;
-		gameObject.transform.eulerAngles += temp;*/
+		//Vector3 temp = gameObject.transform.eulerAngles;
+		//temp.z = 1;
+		//gameObject.transform.eulerAngles += temp;
 
 	}
 

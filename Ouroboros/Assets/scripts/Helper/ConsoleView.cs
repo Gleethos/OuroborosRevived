@@ -11,7 +11,7 @@ using UnityEditor;
 
 public class ConsoleView : MonoBehaviour
 {
-    ConsoleController console;
+    ConsoleExecutor console;
  
     bool didShow = false;
 
@@ -33,7 +33,7 @@ public class ConsoleView : MonoBehaviour
 
     void Start()
     {
-        console = new ConsoleController();
+        console = GameObject.FindObjectOfType(typeof(ConsoleExecutor)) as ConsoleExecutor;//new ConsoleController();
         console.visibilityChanged -= OnVisibilityChanged;
         console.logChanged -= OnLogChanged;
         if (console != null)
