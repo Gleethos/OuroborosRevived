@@ -54,12 +54,17 @@ public class event_script_R4 : Eventscript {
 	
 	void Update () {
 
-		if(mudSwitch.isSwitchedOn()){mud.fill (); colliderE.enabled = false;}
-		if(!mudSwitch.isSwitchedOn()){mud.drain (); colliderE.enabled = true;
+        Debug.Log ("Exit Door open?: " + roomSolved);
 
-				//audio.GetComponent<AudioSource> ().Stop ();
+		if(mudSwitch.isSwitchedOn()){
+            mud.fill ();
+            colliderE.enabled = false;
+        }
 
-			}
+        if (!mudSwitch.isSwitchedOn()){
+            mud.drain ();
+            colliderE.enabled = true;
+		}
 
 		if(mud.isFilling()){
 			player.Movementspeed = (drainedPlayerSpeed(player.GetX, player.GetY, defaultPlayerSpeed));
@@ -85,7 +90,6 @@ public class event_script_R4 : Eventscript {
 
 			case 1:
 
-				exitDoor.setIsLocked ();//exitDoor locked=false!! (unlock)
 				roomSolved = true;
 				eventCounter++;
 
@@ -143,8 +147,7 @@ public class event_script_R4 : Eventscript {
 			{
 				if(exitDoor.isLocked())
 				{
-					//GetComponent<AudioSource> ().enabled = false;
-					player.Movementspeed = (defaultPlayerSpeed);
+				    player.Movementspeed = (defaultPlayerSpeed);
 					r4Dark = GameObject.Find ("raum4D").GetComponent<SpriteRenderer>();
 					r4Dark.enabled = true;
 					r5Dark = GameObject.Find ("raum5D").GetComponent<SpriteRenderer>();
