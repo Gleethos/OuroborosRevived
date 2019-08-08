@@ -1,3 +1,4 @@
+[movePlayerTo:0,2]
 [movePlayerRelative:0,-2]
 [timeout:3]
 [enableDisplay]

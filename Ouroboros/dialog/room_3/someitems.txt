@@ -1,3 +1,5 @@
+[movePlayerTo:-3,15]
+[timeout:1]
 [enableDisplay]
 ???: You'll have to forget everything, ok?[waitForEnter]
 Self: Uhm, no?[waitForEnter]

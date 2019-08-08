@@ -73,7 +73,26 @@ public class event_script_R4 : Eventscript {
 
 		}
 
-		if(isActive)
+        //... Distance Dialogues
+
+        if (distanceToEscape > 10 && distanceToEscape < 15) {
+            dialogManager.setDialog ("dialog1.txt");
+        }
+        if (distanceToEscape > 7 && distanceToEscape < 10) {
+            dialogManager.setDialog ("dialog2.txt");
+        }
+        if (distanceToEscape > 5 && distanceToEscape < 7) {
+            dialogManager.setDialog ("dialog3.txt");
+        }
+        if (distanceToEscape > 4 && distanceToEscape < 5) {
+            dialogManager.setDialog ("dialog4.txt");
+        }
+        if (distanceToEscape > 3 && distanceToEscape < 4) {
+            dialogManager.setDialog ("dialog5.txt");
+        }
+
+        //... Event Flow
+        if (isActive)
 		{
 			dialogManager.setRoom ("room_4");
 			player.SetRoom ("room_4");
@@ -83,55 +102,39 @@ public class event_script_R4 : Eventscript {
 			case 0:
 		
 			
-				if(mudSwitch.isSwitchedOn()){eventCounter++;}
+				if(mudSwitch.isSwitchedOn()){
+                        roomSolved = true;
+                        eventCounter++;
+                    }
 
 
 				break;
 
 			case 1:
-
-				roomSolved = true;
-				eventCounter++;
+                    
 
 				break;
 
 
-			case 2:
-				
-				if(distanceToEscape >10 && distanceToEscape < 15){
-					dialogManager.setDialog ("dialog1.txt");
-					eventCounter++;
-				}					
+			case 2:				
 				break;
 
 			case 3:
-				if(distanceToEscape >7 && distanceToEscape < 10){
-					dialogManager.setDialog ("dialog2.txt");
-					eventCounter++;
-				}
+				
 				break;
 
 
 			case 4:
-				if(distanceToEscape >5 && distanceToEscape < 7){
-					dialogManager.setDialog ("dialog3.txt");
-					eventCounter++;
-				}
+				
 				break;
 
 			case 5:
-				if(distanceToEscape >4 && distanceToEscape < 5){
-					dialogManager.setDialog ("dialog4.txt");
-					eventCounter++;
-				}
+				
 				break;
 
 
 			case 6:
-				if(distanceToEscape >3 && distanceToEscape < 4){
-					dialogManager.setDialog ("dialog5.txt");
-					eventCounter++;
-				}
+				
 				break;
 			case 7:
 				
@@ -145,8 +148,10 @@ public class event_script_R4 : Eventscript {
 
 			if(roomSolved)
 			{
+                Debug.Log ("Room finish");
 				if(exitDoor.isLocked())
 				{
+                    Debug.Log ("Door finished");
 				    player.Movementspeed = (defaultPlayerSpeed);
 					r4Dark = GameObject.Find ("raum4D").GetComponent<SpriteRenderer>();
 					r4Dark.enabled = true;
