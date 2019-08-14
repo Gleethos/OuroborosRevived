@@ -5,13 +5,16 @@ using UnityEngine;
 public class Self : MonoBehaviour
 {
 
-    Dictionary<string, float> traits;
+    Dictionary<string, float> data;
 
     // Start is called before the first frame update
     void Start()
     {
-        traits = new Dictionary<string, float>
+        data = new Dictionary<string, float>
         {
+            /**
+             * traits
+             */
             {"Honest", 0},
             {"Apathetic", 0},
             {"Dogmatic", 0},
@@ -25,7 +28,29 @@ public class Self : MonoBehaviour
             {"Greedy", 0},
             {"Bodhi", 0},
             {"Patient", 0}
+        
+            /**
+             * views
+             */
+            {"Contractarianism", 0},
+            {"Anarchist", 0},
+            {"Moral Objectivist", 0},
 
+            /**
+             * facts:
+             */
+            {"Pet Owner", 0},
+            {"Gun Owner", 0},
+            {"Rich", 0},
+            {"Tall", 0},
+            {"Male", 0},
+            {"European", 0},
+            {"American", 0},
+            {"Asian", 0},
+            {"Asian", 0},
+            {"Parent", 0},
+            {"Student", 0},
+            {"Asian", 0},
         };
     }
 
@@ -52,6 +77,9 @@ public class Self : MonoBehaviour
     {
         switch(t)
         {
+            /**
+             * traits
+             */
             case "Honest":
                 Mod("Empathetic", 0.35f * ((sign) ? 1 : -1));
                 break;
@@ -96,6 +124,14 @@ public class Self : MonoBehaviour
             case "Patient":
                 Mod("Bhodi", 0.1f * ((sign) ? 1 : -1));
                 break;
+            /**
+             * views
+             */
+
+
+            /**
+             * facts
+             */
             default:
                 break;
         }
@@ -103,7 +139,7 @@ public class Self : MonoBehaviour
     }
 
     private void Mod(string t, float v) {
-        traits[t] = traits[t]+v;
+        data[t] = data[t]+v;
     }
 
 
