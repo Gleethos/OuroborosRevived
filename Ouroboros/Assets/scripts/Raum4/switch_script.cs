@@ -8,13 +8,13 @@ public class switch_script : MonoBehaviour {
 	private bool isOn = false;
 	GameObject audio_mud;
 
-	// Use this for initialization
+	
 	void Start () {
 
 		audio_mud = GameObject.Find ("MudSwitch");
 	}
 
-	// Update is called once per frame
+	
 	void Update ()   
 	{
 		if (entry) 
@@ -23,9 +23,10 @@ public class switch_script : MonoBehaviour {
 				if (!audio_mud.GetComponent<AudioSource> ().isPlaying) {
 					audio_mud.GetComponent<AudioSource> ().Play ();
 				}
-				if(isOn == false)
-				    {isOn = true;}
-				else{isOn = false;}
+                if (isOn == false)
+                    isOn = true;
+                else
+                    isOn = false; 
 
 			}
 		}
@@ -33,7 +34,6 @@ public class switch_script : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "Player") {
-			//Debug.Log ("Player detected");
 			entry = true;
 
 		}

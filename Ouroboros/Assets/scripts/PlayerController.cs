@@ -142,6 +142,7 @@ public class PlayerController : MonoBehaviour {
             
             if (Input.GetKeyDown (KeyCode.M) && !invActive) { 
                 StartCoroutine (DisplayItemHolder ());
+                invActive = true;
             }else if (Input.GetKeyDown (KeyCode.M) && invActive) {
 
                 dialog.dialogAusgabe.text = "";

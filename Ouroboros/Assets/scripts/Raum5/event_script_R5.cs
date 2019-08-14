@@ -96,7 +96,6 @@ public class event_script_R5 : Eventscript {
 			{
 				if(exitDoor.checkDark())
 				{
-					File.Delete("dialog/room_5/ItemHolder.txt");
 					endAndProceed();
 				}
 			}
