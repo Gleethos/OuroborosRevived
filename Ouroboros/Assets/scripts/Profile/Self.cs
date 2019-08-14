@@ -27,7 +27,7 @@ public class Self : MonoBehaviour
             {"Humble", 0},
             {"Greedy", 0},
             {"Bodhi", 0},
-            {"Patient", 0}
+            {"Patient", 0},
         
             /**
              * views
